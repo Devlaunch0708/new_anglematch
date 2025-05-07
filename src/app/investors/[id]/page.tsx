@@ -1,29 +1,49 @@
+"use client";
+
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import React, { useEffect } from "react";
+
+interface InvestorProfile {
+  id: string;
+  name: string;
+  bio: string;
+  focusAreas: string[];
+  investmentRange: string;
+  userId: string;
+  user: {
+    name: string;
+    email: string;
+  };
+}
 
 export default async function InvestorProfile({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const user = await getCurrentUser();
   if (!user) redirect("/login");
+  const unwrapped = React.use(params);
+  const { id } = unwrapped;
+  const [investor, setInvestor] = React.useState<InvestorProfile>();
 
-  const investor = await prisma.investor.findUnique({
-    where: { id: params.id },
-    include: {
-      user: {
-        select: {
-          name: true,
-          email: true,
-        },
-      },
-    },
-  });
+  useEffect(() => {
+    const fetchInvestor = async () => {
+      const response = await fetch(`/api/investors/${id}`);
+      if (!response.ok) {
+        console.error("Failed to fetch investor data");
+      } else {
+        const data = await response.json();
+        setInvestor(data);
+      }
+    };
+    fetchInvestor();
+  }, []);
 
   if (!investor) {
     return (
@@ -38,11 +58,13 @@ export default async function InvestorProfile({
   return (
     <div className="container py-8 bg-white mx-auto px-2 md:px-8 lg:px-16">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-        <h1 className="text-3xl font-bold text-blue-500">
-          {investor.name}
-        </h1>
+        <h1 className="text-3xl font-bold text-blue-500">{investor.name}</h1>
         {isOwner && (
-          <Button asChild variant="outline" className="border-blue-500 text-blue-500 hover:bg-blue-50">
+          <Button
+            asChild
+            variant="outline"
+            className="border-blue-500 text-blue-500 hover:bg-blue-50"
+          >
             <Link href={`/investors/${investor.id}/edit`}>Edit Profile</Link>
           </Button>
         )}
@@ -54,23 +76,28 @@ export default async function InvestorProfile({
             <CardTitle className="text-black">About</CardTitle>
           </CardHeader>
           <CardContent className="p-5">
-            <p className="text-gray-600 mb-6">
-              {investor.bio}
-            </p>
+            <p className="text-gray-600 mb-6">{investor.bio}</p>
             <div className="space-y-3 border-t border-gray-200 pt-4">
               <p>
                 <span className="font-medium text-black">Focus Areas:</span>{" "}
                 <div className="mt-1 flex flex-wrap gap-2">
                   {investor.focusAreas.map((area, index) => (
-                    <span key={index} className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-500">
+                    <span
+                      key={index}
+                      className="inline-block px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-500"
+                    >
                       {area}
                     </span>
                   ))}
                 </div>
               </p>
               <p className="flex flex-wrap items-center gap-2 mt-3">
-                <span className="font-medium text-black">Investment Range:</span>{" "}
-                <span className="text-blue-500 font-semibold">{investor.investmentRange}</span>
+                <span className="font-medium text-black">
+                  Investment Range:
+                </span>{" "}
+                <span className="text-blue-500 font-semibold">
+                  {investor.investmentRange}
+                </span>
               </p>
             </div>
           </CardContent>
