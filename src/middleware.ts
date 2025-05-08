@@ -1,41 +1,40 @@
-import { NextResponse, NextRequest } from "next/server";
+import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-import { getToken } from "next-auth/jwt";
-export { default } from "next-auth/middleware";
+import { prisma } from "@/lib/prisma";
 
-export async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request });
-  const url = request.nextUrl;
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next();
+  const supabase = createMiddlewareClient({ req, res });
 
-  if (
-    !token &&
-    (url.pathname.startsWith("/dashboard") ||
-      url.pathname.startsWith("/create-startup") ||
-      url.pathname.startsWith("/create-investor") ||
-      url.pathname.startsWith("/investors") ||
-      url.pathname.startsWith("/startups"))
-  ) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    const dbUser = await prisma.user.findUnique({
+      where: { id: user.id },
+    });
+
+    // Redirect unverified users
+    if (!dbUser?.emailVerified && !req.nextUrl.pathname.startsWith("/verify")) {
+      return NextResponse.redirect(new URL("/verify", req.url));
+    }
   }
+
+  // Existing protected routes check
+  const protectedRoutes = ["/dashboard", "/create-startup", "/create-investor"];
   if (
-    token &&
-    (url.pathname.startsWith("/login") || url.pathname.startsWith("/signup"))
+    !user &&
+    protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))
   ) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/login", req.url));
   }
-  return NextResponse.next();
+
+  return res;
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    "/",
-    "/dashboard",
-    "/create-startup",
-    "/create-investor",
-    "/startups/:path*",
-    "/investors/:path*",
-    "/login",
-    "/signup",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

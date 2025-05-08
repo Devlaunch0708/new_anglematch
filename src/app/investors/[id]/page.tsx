@@ -1,12 +1,12 @@
 "use client";
 
-import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface InvestorProfile {
   id: string;
@@ -21,12 +21,14 @@ interface InvestorProfile {
   };
 }
 
-export default async function InvestorProfile({
+export default function InvestorProfile({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const user = await getCurrentUser();
+  const { data: session } = useSession();
+  const user = session?.user;
+
   if (!user) redirect("/login");
   const unwrapped = React.use(params);
   const { id } = unwrapped;
@@ -39,6 +41,7 @@ export default async function InvestorProfile({
         console.error("Failed to fetch investor data");
       } else {
         const data = await response.json();
+
         setInvestor(data);
       }
     };
@@ -78,7 +81,7 @@ export default async function InvestorProfile({
           <CardContent className="p-5">
             <p className="text-gray-600 mb-6">{investor.bio}</p>
             <div className="space-y-3 border-t border-gray-200 pt-4">
-              <p>
+              <div>
                 <span className="font-medium text-black">Focus Areas:</span>{" "}
                 <div className="mt-1 flex flex-wrap gap-2">
                   {investor.focusAreas.map((area, index) => (
@@ -90,7 +93,7 @@ export default async function InvestorProfile({
                     </span>
                   ))}
                 </div>
-              </p>
+              </div>
               <p className="flex flex-wrap items-center gap-2 mt-3">
                 <span className="font-medium text-black">
                   Investment Range:

@@ -68,11 +68,18 @@ export default function InvestorDashboard() {
             Investor Dashboard
           </h1>
           {!investor ? (
-            <Button asChild className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition-all">
+            <Button
+              asChild
+              className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition-all"
+            >
               <Link href="/create-investor">Create Investor Profile</Link>
             </Button>
           ) : (
-            <Button asChild variant="outline" className="border-blue-500 text-blue-500 hover:bg-blue-50 font-medium px-6 py-2 rounded-lg transition-all">
+            <Button
+              asChild
+              variant="outline"
+              className="border-blue-500 text-blue-500 hover:bg-blue-50 font-medium px-6 py-2 rounded-lg transition-all"
+            >
               <Link href={`/investors/${investor.id}`}>View Profile</Link>
             </Button>
           )}
@@ -81,15 +88,19 @@ export default function InvestorDashboard() {
         {!investor ? (
           <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden">
             <CardHeader className="bg-blue-50 border-b border-gray-200 px-6 py-5">
-              <CardTitle className="text-2xl font-semibold text-black">Complete Your Investor Profile</CardTitle>
+              <CardTitle className="text-2xl font-semibold text-black">
+                Complete Your Investor Profile
+              </CardTitle>
             </CardHeader>
             <CardContent className="px-6 py-8">
               <p className="text-gray-600 mb-6 text-lg">
                 Create your investor profile to start matching with startups.
               </p>
-              <Button asChild className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-lg shadow-md transition-all">
+              <Button
+                asChild
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-lg shadow-md transition-all"
+              >
                 <Link href="/create-investor">Get Started</Link>
-
               </Button>
               <Button variant="outline">Find More Startups</Button>
               <Button variant="outline">View Analytics</Button>
@@ -99,26 +110,45 @@ export default function InvestorDashboard() {
           <div className="grid gap-8">
             <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden">
               <CardHeader className="bg-blue-50 border-b border-gray-200 px-6 py-5">
-                <CardTitle className="text-2xl font-semibold text-black">Your Matches</CardTitle>
+                <CardTitle className="text-2xl font-semibold text-black">
+                  Your Matches
+                </CardTitle>
               </CardHeader>
               <CardContent className="px-6 py-6">
                 {matches.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <div className="p-4 rounded-full bg-blue-50 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-10 w-10 text-blue-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z"
+                        />
                       </svg>
                     </div>
                     <p className="text-gray-600 text-lg">
-                      You don't have any matches yet. We'll notify you when we find compatible startups.
+                      You don't have any matches yet. We'll notify you when we
+                      find compatible startups.
                     </p>
                   </div>
                 ) : (
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {matches.map((match: any) => (
-                      <Card key={match.id} className="border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all">
+                      <Card
+                        key={match.id}
+                        className="border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all"
+                      >
                         <CardHeader className="bg-white px-5 py-4 border-b border-gray-100">
-                          <CardTitle className="text-xl font-semibold text-black">{match.startup.name}</CardTitle>
+                          <CardTitle className="text-xl font-semibold text-black">
+                            {match.startup.name}
+                          </CardTitle>
                           <p className="text-sm text-blue-500 font-medium">
                             {match.startup.industry}
                           </p>
@@ -133,7 +163,11 @@ export default function InvestorDashboard() {
                             </p>
                           </div>
                           <div className="flex gap-3 mt-4">
-                            <Button asChild variant="outline" className="flex-1 border-gray-200 hover:border-blue-500 hover:bg-white text-black font-medium rounded-lg transition-all">
+                            <Button
+                              asChild
+                              variant="outline"
+                              className="flex-1 border-gray-200 hover:border-blue-500 hover:bg-white text-black font-medium rounded-lg transition-all"
+                            >
                               <Link href={`/startups/${match.startup.id}`}>
                                 View Startup
                               </Link>
@@ -152,12 +186,15 @@ export default function InvestorDashboard() {
 
             <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden">
               <CardHeader className="bg-blue-50 border-b border-gray-200 px-6 py-5">
-                <CardTitle className="text-2xl font-semibold text-black">Recommended Startups</CardTitle>
+                <CardTitle className="text-2xl font-semibold text-black">
+                  Recommended Startups
+                </CardTitle>
               </CardHeader>
               <CardContent className="px-6 py-8">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                   <p className="text-gray-600 text-lg">
-                    Based on your investment preferences, we'll recommend startups that match your criteria.
+                    Based on your investment preferences, we'll recommend
+                    startups that match your criteria.
                   </p>
                   <Button className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg shadow-md transition-all whitespace-nowrap">
                     View Recommendations

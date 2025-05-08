@@ -1,13 +1,22 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import { ChevronDown, Menu, User, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChevronDown, Menu, Users, X } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
+import { getCurrentUser } from "@/lib/supabase/auth";
+import { User } from "@/generated/prisma";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
-  const { data: session } = useSession();
+  let user;
+
+  useEffect(() => {
+    const findUser = async () => {
+      user = await getCurrentUser();
+    };
+    findUser();
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#111827] text-white">
@@ -209,7 +218,7 @@ export function Navbar() {
               </div>
             )}
           </div>
-          {!session && (
+          {!user && (
             <div className="flex items-center space-x-3 ml-4">
               <Link
                 href="/login"
@@ -226,7 +235,7 @@ export function Navbar() {
             </div>
           )}
 
-          {session && (
+          {user && (
             <div className="flex items-center space-x-3 ml-4">
               <Link
                 href="/dashboard"
@@ -449,7 +458,7 @@ export function Navbar() {
               )}
             </div>
 
-            {!session && (
+            {!user && (
               <div className="grid grid-cols-2 gap-2 pt-2">
                 <Link
                   href="/login"
@@ -465,7 +474,7 @@ export function Navbar() {
                 </Link>
               </div>
             )}
-            {session && (
+            {user && (
               <div className="grid grid-cols-2 gap-2 pt-2">
                 <Link
                   href="/dashboard"

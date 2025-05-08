@@ -1,5 +1,8 @@
 import { supabase } from "./client";
 
+import { prisma } from "../prisma";
+import { UserRole } from "@/generated/prisma";
+
 export async function signUpWithEmail(
   name: string,
   email: string,
@@ -14,19 +17,19 @@ export async function signUpWithEmail(
       data: {
         name,
         role,
-        email_confirm: false, // Custom metadata
+        email_confirm: false,
       },
     },
   });
 
-  // Add user to public profiles table
   if (data.user) {
-    await supabase.from("profiles").upsert({
-      id: data.user.id,
-      email: data.user.email,
-      name,
-      role,
-      email_verified: false,
+    await prisma.user.create({
+      data: {
+        id: data.user.id,
+        email: data.user.email as string,
+        name,
+        role: role as UserRole,
+      },
     });
   }
 

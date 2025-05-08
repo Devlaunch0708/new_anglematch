@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./provider";
+import SupabaseProvider from "@/lib/supabase/provider";
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { VerifyReminder } from "@/components/verify-reminder";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
+        <SupabaseProvider>
+          <VerifyReminder />
           <main className="min-h-screen">{children}</main>
-        </Providers>
+        </SupabaseProvider>
       </body>
     </html>
   );
