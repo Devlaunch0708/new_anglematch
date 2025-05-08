@@ -4,7 +4,6 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
-  console.log(data);
 
   try {
     const checkUser = await prisma.user.findUnique({

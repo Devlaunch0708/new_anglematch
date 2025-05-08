@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { signIn } from "next-auth/react";
 import { signUpWithEmail } from "@/lib/supabase/auth";
+import { supabase } from "../../lib/supabase/client";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -41,12 +42,27 @@ export default function SignupPage() {
     role: "FOUNDER" | "INVESTOR";
   }) => {
     try {
-      const { data, error: authError } = await signUpWithEmail(
-        formdata.name,
-        formdata.email,
-        formdata.password,
-        formdata.role
-      );
+      const { data, error: authError } = await supabase.auth.signUp({
+        email: formdata.email,
+        password: formdata.password,
+        options: {
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm`,
+          data: {
+            name: formdata.name,
+            role: formdata.role,
+            email_confirm: false,
+          },
+        },
+      });
+      if (data.user) {
+        await fetch("/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formdata),
+        });
+      }
 
       if (authError) {
         setError(authError.message);

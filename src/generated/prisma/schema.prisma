@@ -22,15 +22,16 @@ enum UserRole {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String
-  email         String    @unique
-  emailVerified DateTime?
-  role          UserRole  @default(FOUNDER)
+  email         String         @unique
+  emailVerified Boolean        @default(false)
+  role          UserRole       @default(FOUNDER)
   startup       Startup?
   investor      Investor?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  Verification  Verification[]
 }
 
 model Startup {
@@ -49,16 +50,17 @@ model Startup {
 }
 
 model Investor {
-  id              String   @id @default(cuid())
+  id              String         @id @default(cuid())
   name            String
   bio             String
   focusAreas      String[]
   investmentRange String
-  userId          String   @unique
-  user            User     @relation(fields: [userId], references: [id])
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  userId          String         @unique
+  user            User           @relation(fields: [userId], references: [id])
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
   Match           Match[]
+  Verification    Verification[]
 }
 
 model Match {
@@ -73,4 +75,23 @@ model Match {
   updatedAt  DateTime @updatedAt
 
   @@unique([startupId, investorId])
+}
+
+model Verification {
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  documents   String[]
+  status      Status    @default(pending)
+  submittedAt DateTime  @default(now())
+  reviewedAt  DateTime?
+  adminNotes  String?
+  Investor    Investor? @relation(fields: [investorId], references: [id])
+  investorId  String?
+}
+
+enum Status {
+  pending
+  approved
+  rejected
 }

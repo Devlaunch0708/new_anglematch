@@ -164,6 +164,17 @@ exports.Prisma.MatchScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.VerificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  documents: 'documents',
+  status: 'status',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  adminNotes: 'adminNotes',
+  investorId: 'investorId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -184,11 +195,18 @@ exports.UserRole = exports.$Enums.UserRole = {
   ADMIN: 'ADMIN'
 };
 
+exports.Status = exports.$Enums.Status = {
+  pending: 'pending',
+  approved: 'approved',
+  rejected: 'rejected'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Startup: 'Startup',
   Investor: 'Investor',
-  Match: 'Match'
+  Match: 'Match',
+  Verification: 'Verification'
 };
 
 /**

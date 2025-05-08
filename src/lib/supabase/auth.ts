@@ -1,5 +1,5 @@
+"use server";
 import { supabase } from "./client";
-
 import { prisma } from "../prisma";
 import { UserRole } from "@/generated/prisma";
 
