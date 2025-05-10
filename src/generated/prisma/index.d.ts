@@ -38,6 +38,16 @@ export type Investor = $Result.DefaultSelection<Prisma.$InvestorPayload>
  * 
  */
 export type Match = $Result.DefaultSelection<Prisma.$MatchPayload>
+/**
+ * Model Interaction
+ * 
+ */
+export type Interaction = $Result.DefaultSelection<Prisma.$InteractionPayload>
+/**
+ * Model Pitch
+ * 
+ */
+export type Pitch = $Result.DefaultSelection<Prisma.$PitchPayload>
 
 /**
  * Enums
@@ -231,6 +241,26 @@ export class PrismaClient<
     * ```
     */
   get match(): Prisma.MatchDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.interaction`: Exposes CRUD operations for the **Interaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Interactions
+    * const interactions = await prisma.interaction.findMany()
+    * ```
+    */
+  get interaction(): Prisma.InteractionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pitch`: Exposes CRUD operations for the **Pitch** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Pitches
+    * const pitches = await prisma.pitch.findMany()
+    * ```
+    */
+  get pitch(): Prisma.PitchDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -675,7 +705,9 @@ export namespace Prisma {
     Verification: 'Verification',
     Startup: 'Startup',
     Investor: 'Investor',
-    Match: 'Match'
+    Match: 'Match',
+    Interaction: 'Interaction',
+    Pitch: 'Pitch'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -694,7 +726,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "verification" | "startup" | "investor" | "match"
+      modelProps: "user" | "verification" | "startup" | "investor" | "match" | "interaction" | "pitch"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1068,6 +1100,154 @@ export namespace Prisma {
           }
         }
       }
+      Interaction: {
+        payload: Prisma.$InteractionPayload<ExtArgs>
+        fields: Prisma.InteractionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InteractionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InteractionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>
+          }
+          findFirst: {
+            args: Prisma.InteractionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InteractionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>
+          }
+          findMany: {
+            args: Prisma.InteractionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>[]
+          }
+          create: {
+            args: Prisma.InteractionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>
+          }
+          createMany: {
+            args: Prisma.InteractionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InteractionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>[]
+          }
+          delete: {
+            args: Prisma.InteractionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>
+          }
+          update: {
+            args: Prisma.InteractionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>
+          }
+          deleteMany: {
+            args: Prisma.InteractionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InteractionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InteractionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>[]
+          }
+          upsert: {
+            args: Prisma.InteractionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InteractionPayload>
+          }
+          aggregate: {
+            args: Prisma.InteractionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInteraction>
+          }
+          groupBy: {
+            args: Prisma.InteractionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InteractionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InteractionCountArgs<ExtArgs>
+            result: $Utils.Optional<InteractionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Pitch: {
+        payload: Prisma.$PitchPayload<ExtArgs>
+        fields: Prisma.PitchFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PitchFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PitchFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>
+          }
+          findFirst: {
+            args: Prisma.PitchFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PitchFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>
+          }
+          findMany: {
+            args: Prisma.PitchFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>[]
+          }
+          create: {
+            args: Prisma.PitchCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>
+          }
+          createMany: {
+            args: Prisma.PitchCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PitchCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>[]
+          }
+          delete: {
+            args: Prisma.PitchDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>
+          }
+          update: {
+            args: Prisma.PitchUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>
+          }
+          deleteMany: {
+            args: Prisma.PitchDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PitchUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PitchUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>[]
+          }
+          upsert: {
+            args: Prisma.PitchUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PitchPayload>
+          }
+          aggregate: {
+            args: Prisma.PitchAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePitch>
+          }
+          groupBy: {
+            args: Prisma.PitchGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PitchGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PitchCountArgs<ExtArgs>
+            result: $Utils.Optional<PitchCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1157,6 +1337,8 @@ export namespace Prisma {
     startup?: StartupOmit
     investor?: InvestorOmit
     match?: MatchOmit
+    interaction?: InteractionOmit
+    pitch?: PitchOmit
   }
 
   /* Types for Logging */
@@ -1247,6 +1429,46 @@ export namespace Prisma {
 
 
   /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    pitches: number
+    interactions: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pitches?: boolean | UserCountOutputTypeCountPitchesArgs
+    interactions?: boolean | UserCountOutputTypeCountInteractionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPitchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PitchWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InteractionWhereInput
+  }
+
+
+  /**
    * Count Type StartupCountOutputType
    */
 
@@ -1305,6 +1527,37 @@ export namespace Prisma {
    */
   export type InvestorCountOutputTypeCountMatchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MatchWhereInput
+  }
+
+
+  /**
+   * Count Type PitchCountOutputType
+   */
+
+  export type PitchCountOutputType = {
+    interactions: number
+  }
+
+  export type PitchCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    interactions?: boolean | PitchCountOutputTypeCountInteractionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PitchCountOutputType without action
+   */
+  export type PitchCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PitchCountOutputType
+     */
+    select?: PitchCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PitchCountOutputType without action
+   */
+  export type PitchCountOutputTypeCountInteractionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InteractionWhereInput
   }
 
 
@@ -1495,6 +1748,9 @@ export namespace Prisma {
     verification?: boolean | User$verificationArgs<ExtArgs>
     startup?: boolean | User$startupArgs<ExtArgs>
     investor?: boolean | User$investorArgs<ExtArgs>
+    pitches?: boolean | User$pitchesArgs<ExtArgs>
+    interactions?: boolean | User$interactionsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1532,6 +1788,9 @@ export namespace Prisma {
     verification?: boolean | User$verificationArgs<ExtArgs>
     startup?: boolean | User$startupArgs<ExtArgs>
     investor?: boolean | User$investorArgs<ExtArgs>
+    pitches?: boolean | User$pitchesArgs<ExtArgs>
+    interactions?: boolean | User$interactionsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1542,6 +1801,8 @@ export namespace Prisma {
       verification: Prisma.$VerificationPayload<ExtArgs> | null
       startup: Prisma.$StartupPayload<ExtArgs> | null
       investor: Prisma.$InvestorPayload<ExtArgs> | null
+      pitches: Prisma.$PitchPayload<ExtArgs>[]
+      interactions: Prisma.$InteractionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1948,6 +2209,8 @@ export namespace Prisma {
     verification<T extends User$verificationArgs<ExtArgs> = {}>(args?: Subset<T, User$verificationArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     startup<T extends User$startupArgs<ExtArgs> = {}>(args?: Subset<T, User$startupArgs<ExtArgs>>): Prisma__StartupClient<$Result.GetResult<Prisma.$StartupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     investor<T extends User$investorArgs<ExtArgs> = {}>(args?: Subset<T, User$investorArgs<ExtArgs>>): Prisma__InvestorClient<$Result.GetResult<Prisma.$InvestorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    pitches<T extends User$pitchesArgs<ExtArgs> = {}>(args?: Subset<T, User$pitchesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    interactions<T extends User$interactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$interactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2426,6 +2689,54 @@ export namespace Prisma {
      */
     include?: InvestorInclude<ExtArgs> | null
     where?: InvestorWhereInput
+  }
+
+  /**
+   * User.pitches
+   */
+  export type User$pitchesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    where?: PitchWhereInput
+    orderBy?: PitchOrderByWithRelationInput | PitchOrderByWithRelationInput[]
+    cursor?: PitchWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PitchScalarFieldEnum | PitchScalarFieldEnum[]
+  }
+
+  /**
+   * User.interactions
+   */
+  export type User$interactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    where?: InteractionWhereInput
+    orderBy?: InteractionOrderByWithRelationInput | InteractionOrderByWithRelationInput[]
+    cursor?: InteractionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InteractionScalarFieldEnum | InteractionScalarFieldEnum[]
   }
 
   /**
@@ -6964,6 +7275,2251 @@ export namespace Prisma {
 
 
   /**
+   * Model Interaction
+   */
+
+  export type AggregateInteraction = {
+    _count: InteractionCountAggregateOutputType | null
+    _min: InteractionMinAggregateOutputType | null
+    _max: InteractionMaxAggregateOutputType | null
+  }
+
+  export type InteractionMinAggregateOutputType = {
+    id: string | null
+    pitchId: string | null
+    userId: string | null
+    type: string | null
+    status: string | null
+    createdAt: Date | null
+  }
+
+  export type InteractionMaxAggregateOutputType = {
+    id: string | null
+    pitchId: string | null
+    userId: string | null
+    type: string | null
+    status: string | null
+    createdAt: Date | null
+  }
+
+  export type InteractionCountAggregateOutputType = {
+    id: number
+    pitchId: number
+    userId: number
+    type: number
+    status: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InteractionMinAggregateInputType = {
+    id?: true
+    pitchId?: true
+    userId?: true
+    type?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type InteractionMaxAggregateInputType = {
+    id?: true
+    pitchId?: true
+    userId?: true
+    type?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type InteractionCountAggregateInputType = {
+    id?: true
+    pitchId?: true
+    userId?: true
+    type?: true
+    status?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InteractionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Interaction to aggregate.
+     */
+    where?: InteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Interactions to fetch.
+     */
+    orderBy?: InteractionOrderByWithRelationInput | InteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Interactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Interactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Interactions
+    **/
+    _count?: true | InteractionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InteractionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InteractionMaxAggregateInputType
+  }
+
+  export type GetInteractionAggregateType<T extends InteractionAggregateArgs> = {
+        [P in keyof T & keyof AggregateInteraction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInteraction[P]>
+      : GetScalarType<T[P], AggregateInteraction[P]>
+  }
+
+
+
+
+  export type InteractionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InteractionWhereInput
+    orderBy?: InteractionOrderByWithAggregationInput | InteractionOrderByWithAggregationInput[]
+    by: InteractionScalarFieldEnum[] | InteractionScalarFieldEnum
+    having?: InteractionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InteractionCountAggregateInputType | true
+    _min?: InteractionMinAggregateInputType
+    _max?: InteractionMaxAggregateInputType
+  }
+
+  export type InteractionGroupByOutputType = {
+    id: string
+    pitchId: string
+    userId: string
+    type: string
+    status: string
+    createdAt: Date
+    _count: InteractionCountAggregateOutputType | null
+    _min: InteractionMinAggregateOutputType | null
+    _max: InteractionMaxAggregateOutputType | null
+  }
+
+  type GetInteractionGroupByPayload<T extends InteractionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InteractionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InteractionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InteractionGroupByOutputType[P]>
+            : GetScalarType<T[P], InteractionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InteractionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pitchId?: boolean
+    userId?: boolean
+    type?: boolean
+    status?: boolean
+    createdAt?: boolean
+    pitch?: boolean | PitchDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["interaction"]>
+
+  export type InteractionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pitchId?: boolean
+    userId?: boolean
+    type?: boolean
+    status?: boolean
+    createdAt?: boolean
+    pitch?: boolean | PitchDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["interaction"]>
+
+  export type InteractionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    pitchId?: boolean
+    userId?: boolean
+    type?: boolean
+    status?: boolean
+    createdAt?: boolean
+    pitch?: boolean | PitchDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["interaction"]>
+
+  export type InteractionSelectScalar = {
+    id?: boolean
+    pitchId?: boolean
+    userId?: boolean
+    type?: boolean
+    status?: boolean
+    createdAt?: boolean
+  }
+
+  export type InteractionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "pitchId" | "userId" | "type" | "status" | "createdAt", ExtArgs["result"]["interaction"]>
+  export type InteractionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pitch?: boolean | PitchDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type InteractionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pitch?: boolean | PitchDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type InteractionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pitch?: boolean | PitchDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $InteractionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Interaction"
+    objects: {
+      pitch: Prisma.$PitchPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      pitchId: string
+      userId: string
+      type: string
+      status: string
+      createdAt: Date
+    }, ExtArgs["result"]["interaction"]>
+    composites: {}
+  }
+
+  type InteractionGetPayload<S extends boolean | null | undefined | InteractionDefaultArgs> = $Result.GetResult<Prisma.$InteractionPayload, S>
+
+  type InteractionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InteractionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InteractionCountAggregateInputType | true
+    }
+
+  export interface InteractionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Interaction'], meta: { name: 'Interaction' } }
+    /**
+     * Find zero or one Interaction that matches the filter.
+     * @param {InteractionFindUniqueArgs} args - Arguments to find a Interaction
+     * @example
+     * // Get one Interaction
+     * const interaction = await prisma.interaction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InteractionFindUniqueArgs>(args: SelectSubset<T, InteractionFindUniqueArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Interaction that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InteractionFindUniqueOrThrowArgs} args - Arguments to find a Interaction
+     * @example
+     * // Get one Interaction
+     * const interaction = await prisma.interaction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InteractionFindUniqueOrThrowArgs>(args: SelectSubset<T, InteractionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Interaction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionFindFirstArgs} args - Arguments to find a Interaction
+     * @example
+     * // Get one Interaction
+     * const interaction = await prisma.interaction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InteractionFindFirstArgs>(args?: SelectSubset<T, InteractionFindFirstArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Interaction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionFindFirstOrThrowArgs} args - Arguments to find a Interaction
+     * @example
+     * // Get one Interaction
+     * const interaction = await prisma.interaction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InteractionFindFirstOrThrowArgs>(args?: SelectSubset<T, InteractionFindFirstOrThrowArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Interactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Interactions
+     * const interactions = await prisma.interaction.findMany()
+     * 
+     * // Get first 10 Interactions
+     * const interactions = await prisma.interaction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const interactionWithIdOnly = await prisma.interaction.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InteractionFindManyArgs>(args?: SelectSubset<T, InteractionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Interaction.
+     * @param {InteractionCreateArgs} args - Arguments to create a Interaction.
+     * @example
+     * // Create one Interaction
+     * const Interaction = await prisma.interaction.create({
+     *   data: {
+     *     // ... data to create a Interaction
+     *   }
+     * })
+     * 
+     */
+    create<T extends InteractionCreateArgs>(args: SelectSubset<T, InteractionCreateArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Interactions.
+     * @param {InteractionCreateManyArgs} args - Arguments to create many Interactions.
+     * @example
+     * // Create many Interactions
+     * const interaction = await prisma.interaction.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InteractionCreateManyArgs>(args?: SelectSubset<T, InteractionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Interactions and returns the data saved in the database.
+     * @param {InteractionCreateManyAndReturnArgs} args - Arguments to create many Interactions.
+     * @example
+     * // Create many Interactions
+     * const interaction = await prisma.interaction.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Interactions and only return the `id`
+     * const interactionWithIdOnly = await prisma.interaction.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InteractionCreateManyAndReturnArgs>(args?: SelectSubset<T, InteractionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Interaction.
+     * @param {InteractionDeleteArgs} args - Arguments to delete one Interaction.
+     * @example
+     * // Delete one Interaction
+     * const Interaction = await prisma.interaction.delete({
+     *   where: {
+     *     // ... filter to delete one Interaction
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InteractionDeleteArgs>(args: SelectSubset<T, InteractionDeleteArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Interaction.
+     * @param {InteractionUpdateArgs} args - Arguments to update one Interaction.
+     * @example
+     * // Update one Interaction
+     * const interaction = await prisma.interaction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InteractionUpdateArgs>(args: SelectSubset<T, InteractionUpdateArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Interactions.
+     * @param {InteractionDeleteManyArgs} args - Arguments to filter Interactions to delete.
+     * @example
+     * // Delete a few Interactions
+     * const { count } = await prisma.interaction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InteractionDeleteManyArgs>(args?: SelectSubset<T, InteractionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Interactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Interactions
+     * const interaction = await prisma.interaction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InteractionUpdateManyArgs>(args: SelectSubset<T, InteractionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Interactions and returns the data updated in the database.
+     * @param {InteractionUpdateManyAndReturnArgs} args - Arguments to update many Interactions.
+     * @example
+     * // Update many Interactions
+     * const interaction = await prisma.interaction.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Interactions and only return the `id`
+     * const interactionWithIdOnly = await prisma.interaction.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InteractionUpdateManyAndReturnArgs>(args: SelectSubset<T, InteractionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Interaction.
+     * @param {InteractionUpsertArgs} args - Arguments to update or create a Interaction.
+     * @example
+     * // Update or create a Interaction
+     * const interaction = await prisma.interaction.upsert({
+     *   create: {
+     *     // ... data to create a Interaction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Interaction we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InteractionUpsertArgs>(args: SelectSubset<T, InteractionUpsertArgs<ExtArgs>>): Prisma__InteractionClient<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Interactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionCountArgs} args - Arguments to filter Interactions to count.
+     * @example
+     * // Count the number of Interactions
+     * const count = await prisma.interaction.count({
+     *   where: {
+     *     // ... the filter for the Interactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends InteractionCountArgs>(
+      args?: Subset<T, InteractionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InteractionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Interaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InteractionAggregateArgs>(args: Subset<T, InteractionAggregateArgs>): Prisma.PrismaPromise<GetInteractionAggregateType<T>>
+
+    /**
+     * Group by Interaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InteractionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InteractionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InteractionGroupByArgs['orderBy'] }
+        : { orderBy?: InteractionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InteractionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInteractionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Interaction model
+   */
+  readonly fields: InteractionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Interaction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InteractionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    pitch<T extends PitchDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PitchDefaultArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Interaction model
+   */
+  interface InteractionFieldRefs {
+    readonly id: FieldRef<"Interaction", 'String'>
+    readonly pitchId: FieldRef<"Interaction", 'String'>
+    readonly userId: FieldRef<"Interaction", 'String'>
+    readonly type: FieldRef<"Interaction", 'String'>
+    readonly status: FieldRef<"Interaction", 'String'>
+    readonly createdAt: FieldRef<"Interaction", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Interaction findUnique
+   */
+  export type InteractionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which Interaction to fetch.
+     */
+    where: InteractionWhereUniqueInput
+  }
+
+  /**
+   * Interaction findUniqueOrThrow
+   */
+  export type InteractionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which Interaction to fetch.
+     */
+    where: InteractionWhereUniqueInput
+  }
+
+  /**
+   * Interaction findFirst
+   */
+  export type InteractionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which Interaction to fetch.
+     */
+    where?: InteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Interactions to fetch.
+     */
+    orderBy?: InteractionOrderByWithRelationInput | InteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Interactions.
+     */
+    cursor?: InteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Interactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Interactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Interactions.
+     */
+    distinct?: InteractionScalarFieldEnum | InteractionScalarFieldEnum[]
+  }
+
+  /**
+   * Interaction findFirstOrThrow
+   */
+  export type InteractionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which Interaction to fetch.
+     */
+    where?: InteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Interactions to fetch.
+     */
+    orderBy?: InteractionOrderByWithRelationInput | InteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Interactions.
+     */
+    cursor?: InteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Interactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Interactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Interactions.
+     */
+    distinct?: InteractionScalarFieldEnum | InteractionScalarFieldEnum[]
+  }
+
+  /**
+   * Interaction findMany
+   */
+  export type InteractionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * Filter, which Interactions to fetch.
+     */
+    where?: InteractionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Interactions to fetch.
+     */
+    orderBy?: InteractionOrderByWithRelationInput | InteractionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Interactions.
+     */
+    cursor?: InteractionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Interactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Interactions.
+     */
+    skip?: number
+    distinct?: InteractionScalarFieldEnum | InteractionScalarFieldEnum[]
+  }
+
+  /**
+   * Interaction create
+   */
+  export type InteractionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Interaction.
+     */
+    data: XOR<InteractionCreateInput, InteractionUncheckedCreateInput>
+  }
+
+  /**
+   * Interaction createMany
+   */
+  export type InteractionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Interactions.
+     */
+    data: InteractionCreateManyInput | InteractionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Interaction createManyAndReturn
+   */
+  export type InteractionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Interactions.
+     */
+    data: InteractionCreateManyInput | InteractionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Interaction update
+   */
+  export type InteractionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Interaction.
+     */
+    data: XOR<InteractionUpdateInput, InteractionUncheckedUpdateInput>
+    /**
+     * Choose, which Interaction to update.
+     */
+    where: InteractionWhereUniqueInput
+  }
+
+  /**
+   * Interaction updateMany
+   */
+  export type InteractionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Interactions.
+     */
+    data: XOR<InteractionUpdateManyMutationInput, InteractionUncheckedUpdateManyInput>
+    /**
+     * Filter which Interactions to update
+     */
+    where?: InteractionWhereInput
+    /**
+     * Limit how many Interactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Interaction updateManyAndReturn
+   */
+  export type InteractionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * The data used to update Interactions.
+     */
+    data: XOR<InteractionUpdateManyMutationInput, InteractionUncheckedUpdateManyInput>
+    /**
+     * Filter which Interactions to update
+     */
+    where?: InteractionWhereInput
+    /**
+     * Limit how many Interactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Interaction upsert
+   */
+  export type InteractionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Interaction to update in case it exists.
+     */
+    where: InteractionWhereUniqueInput
+    /**
+     * In case the Interaction found by the `where` argument doesn't exist, create a new Interaction with this data.
+     */
+    create: XOR<InteractionCreateInput, InteractionUncheckedCreateInput>
+    /**
+     * In case the Interaction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InteractionUpdateInput, InteractionUncheckedUpdateInput>
+  }
+
+  /**
+   * Interaction delete
+   */
+  export type InteractionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    /**
+     * Filter which Interaction to delete.
+     */
+    where: InteractionWhereUniqueInput
+  }
+
+  /**
+   * Interaction deleteMany
+   */
+  export type InteractionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Interactions to delete
+     */
+    where?: InteractionWhereInput
+    /**
+     * Limit how many Interactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Interaction without action
+   */
+  export type InteractionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Pitch
+   */
+
+  export type AggregatePitch = {
+    _count: PitchCountAggregateOutputType | null
+    _min: PitchMinAggregateOutputType | null
+    _max: PitchMaxAggregateOutputType | null
+  }
+
+  export type PitchMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    description: string | null
+    deckUrl: string | null
+    solutionUrl: string | null
+    marketSize: string | null
+    traction: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PitchMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    title: string | null
+    description: string | null
+    deckUrl: string | null
+    solutionUrl: string | null
+    marketSize: string | null
+    traction: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PitchCountAggregateOutputType = {
+    id: number
+    userId: number
+    title: number
+    description: number
+    deckUrl: number
+    solutionUrl: number
+    marketSize: number
+    traction: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PitchMinAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    description?: true
+    deckUrl?: true
+    solutionUrl?: true
+    marketSize?: true
+    traction?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PitchMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    description?: true
+    deckUrl?: true
+    solutionUrl?: true
+    marketSize?: true
+    traction?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PitchCountAggregateInputType = {
+    id?: true
+    userId?: true
+    title?: true
+    description?: true
+    deckUrl?: true
+    solutionUrl?: true
+    marketSize?: true
+    traction?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PitchAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pitch to aggregate.
+     */
+    where?: PitchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pitches to fetch.
+     */
+    orderBy?: PitchOrderByWithRelationInput | PitchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PitchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pitches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pitches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Pitches
+    **/
+    _count?: true | PitchCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PitchMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PitchMaxAggregateInputType
+  }
+
+  export type GetPitchAggregateType<T extends PitchAggregateArgs> = {
+        [P in keyof T & keyof AggregatePitch]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePitch[P]>
+      : GetScalarType<T[P], AggregatePitch[P]>
+  }
+
+
+
+
+  export type PitchGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PitchWhereInput
+    orderBy?: PitchOrderByWithAggregationInput | PitchOrderByWithAggregationInput[]
+    by: PitchScalarFieldEnum[] | PitchScalarFieldEnum
+    having?: PitchScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PitchCountAggregateInputType | true
+    _min?: PitchMinAggregateInputType
+    _max?: PitchMaxAggregateInputType
+  }
+
+  export type PitchGroupByOutputType = {
+    id: string
+    userId: string
+    title: string
+    description: string
+    deckUrl: string | null
+    solutionUrl: string | null
+    marketSize: string | null
+    traction: string | null
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PitchCountAggregateOutputType | null
+    _min: PitchMinAggregateOutputType | null
+    _max: PitchMaxAggregateOutputType | null
+  }
+
+  type GetPitchGroupByPayload<T extends PitchGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PitchGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PitchGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PitchGroupByOutputType[P]>
+            : GetScalarType<T[P], PitchGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PitchSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    deckUrl?: boolean
+    solutionUrl?: boolean
+    marketSize?: boolean
+    traction?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    interactions?: boolean | Pitch$interactionsArgs<ExtArgs>
+    _count?: boolean | PitchCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pitch"]>
+
+  export type PitchSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    deckUrl?: boolean
+    solutionUrl?: boolean
+    marketSize?: boolean
+    traction?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pitch"]>
+
+  export type PitchSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    deckUrl?: boolean
+    solutionUrl?: boolean
+    marketSize?: boolean
+    traction?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pitch"]>
+
+  export type PitchSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    title?: boolean
+    description?: boolean
+    deckUrl?: boolean
+    solutionUrl?: boolean
+    marketSize?: boolean
+    traction?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PitchOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "description" | "deckUrl" | "solutionUrl" | "marketSize" | "traction" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["pitch"]>
+  export type PitchInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    interactions?: boolean | Pitch$interactionsArgs<ExtArgs>
+    _count?: boolean | PitchCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PitchIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PitchIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PitchPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Pitch"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      interactions: Prisma.$InteractionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      title: string
+      description: string
+      deckUrl: string | null
+      solutionUrl: string | null
+      marketSize: string | null
+      traction: string | null
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pitch"]>
+    composites: {}
+  }
+
+  type PitchGetPayload<S extends boolean | null | undefined | PitchDefaultArgs> = $Result.GetResult<Prisma.$PitchPayload, S>
+
+  type PitchCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PitchFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PitchCountAggregateInputType | true
+    }
+
+  export interface PitchDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Pitch'], meta: { name: 'Pitch' } }
+    /**
+     * Find zero or one Pitch that matches the filter.
+     * @param {PitchFindUniqueArgs} args - Arguments to find a Pitch
+     * @example
+     * // Get one Pitch
+     * const pitch = await prisma.pitch.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PitchFindUniqueArgs>(args: SelectSubset<T, PitchFindUniqueArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Pitch that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PitchFindUniqueOrThrowArgs} args - Arguments to find a Pitch
+     * @example
+     * // Get one Pitch
+     * const pitch = await prisma.pitch.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PitchFindUniqueOrThrowArgs>(args: SelectSubset<T, PitchFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Pitch that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchFindFirstArgs} args - Arguments to find a Pitch
+     * @example
+     * // Get one Pitch
+     * const pitch = await prisma.pitch.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PitchFindFirstArgs>(args?: SelectSubset<T, PitchFindFirstArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Pitch that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchFindFirstOrThrowArgs} args - Arguments to find a Pitch
+     * @example
+     * // Get one Pitch
+     * const pitch = await prisma.pitch.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PitchFindFirstOrThrowArgs>(args?: SelectSubset<T, PitchFindFirstOrThrowArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Pitches that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Pitches
+     * const pitches = await prisma.pitch.findMany()
+     * 
+     * // Get first 10 Pitches
+     * const pitches = await prisma.pitch.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pitchWithIdOnly = await prisma.pitch.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PitchFindManyArgs>(args?: SelectSubset<T, PitchFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Pitch.
+     * @param {PitchCreateArgs} args - Arguments to create a Pitch.
+     * @example
+     * // Create one Pitch
+     * const Pitch = await prisma.pitch.create({
+     *   data: {
+     *     // ... data to create a Pitch
+     *   }
+     * })
+     * 
+     */
+    create<T extends PitchCreateArgs>(args: SelectSubset<T, PitchCreateArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Pitches.
+     * @param {PitchCreateManyArgs} args - Arguments to create many Pitches.
+     * @example
+     * // Create many Pitches
+     * const pitch = await prisma.pitch.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PitchCreateManyArgs>(args?: SelectSubset<T, PitchCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Pitches and returns the data saved in the database.
+     * @param {PitchCreateManyAndReturnArgs} args - Arguments to create many Pitches.
+     * @example
+     * // Create many Pitches
+     * const pitch = await prisma.pitch.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Pitches and only return the `id`
+     * const pitchWithIdOnly = await prisma.pitch.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PitchCreateManyAndReturnArgs>(args?: SelectSubset<T, PitchCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Pitch.
+     * @param {PitchDeleteArgs} args - Arguments to delete one Pitch.
+     * @example
+     * // Delete one Pitch
+     * const Pitch = await prisma.pitch.delete({
+     *   where: {
+     *     // ... filter to delete one Pitch
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PitchDeleteArgs>(args: SelectSubset<T, PitchDeleteArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Pitch.
+     * @param {PitchUpdateArgs} args - Arguments to update one Pitch.
+     * @example
+     * // Update one Pitch
+     * const pitch = await prisma.pitch.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PitchUpdateArgs>(args: SelectSubset<T, PitchUpdateArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Pitches.
+     * @param {PitchDeleteManyArgs} args - Arguments to filter Pitches to delete.
+     * @example
+     * // Delete a few Pitches
+     * const { count } = await prisma.pitch.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PitchDeleteManyArgs>(args?: SelectSubset<T, PitchDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pitches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Pitches
+     * const pitch = await prisma.pitch.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PitchUpdateManyArgs>(args: SelectSubset<T, PitchUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pitches and returns the data updated in the database.
+     * @param {PitchUpdateManyAndReturnArgs} args - Arguments to update many Pitches.
+     * @example
+     * // Update many Pitches
+     * const pitch = await prisma.pitch.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Pitches and only return the `id`
+     * const pitchWithIdOnly = await prisma.pitch.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PitchUpdateManyAndReturnArgs>(args: SelectSubset<T, PitchUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Pitch.
+     * @param {PitchUpsertArgs} args - Arguments to update or create a Pitch.
+     * @example
+     * // Update or create a Pitch
+     * const pitch = await prisma.pitch.upsert({
+     *   create: {
+     *     // ... data to create a Pitch
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Pitch we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PitchUpsertArgs>(args: SelectSubset<T, PitchUpsertArgs<ExtArgs>>): Prisma__PitchClient<$Result.GetResult<Prisma.$PitchPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Pitches.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchCountArgs} args - Arguments to filter Pitches to count.
+     * @example
+     * // Count the number of Pitches
+     * const count = await prisma.pitch.count({
+     *   where: {
+     *     // ... the filter for the Pitches we want to count
+     *   }
+     * })
+    **/
+    count<T extends PitchCountArgs>(
+      args?: Subset<T, PitchCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PitchCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Pitch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PitchAggregateArgs>(args: Subset<T, PitchAggregateArgs>): Prisma.PrismaPromise<GetPitchAggregateType<T>>
+
+    /**
+     * Group by Pitch.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PitchGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PitchGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PitchGroupByArgs['orderBy'] }
+        : { orderBy?: PitchGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PitchGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPitchGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Pitch model
+   */
+  readonly fields: PitchFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Pitch.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PitchClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    interactions<T extends Pitch$interactionsArgs<ExtArgs> = {}>(args?: Subset<T, Pitch$interactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InteractionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Pitch model
+   */
+  interface PitchFieldRefs {
+    readonly id: FieldRef<"Pitch", 'String'>
+    readonly userId: FieldRef<"Pitch", 'String'>
+    readonly title: FieldRef<"Pitch", 'String'>
+    readonly description: FieldRef<"Pitch", 'String'>
+    readonly deckUrl: FieldRef<"Pitch", 'String'>
+    readonly solutionUrl: FieldRef<"Pitch", 'String'>
+    readonly marketSize: FieldRef<"Pitch", 'String'>
+    readonly traction: FieldRef<"Pitch", 'String'>
+    readonly status: FieldRef<"Pitch", 'String'>
+    readonly createdAt: FieldRef<"Pitch", 'DateTime'>
+    readonly updatedAt: FieldRef<"Pitch", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Pitch findUnique
+   */
+  export type PitchFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * Filter, which Pitch to fetch.
+     */
+    where: PitchWhereUniqueInput
+  }
+
+  /**
+   * Pitch findUniqueOrThrow
+   */
+  export type PitchFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * Filter, which Pitch to fetch.
+     */
+    where: PitchWhereUniqueInput
+  }
+
+  /**
+   * Pitch findFirst
+   */
+  export type PitchFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * Filter, which Pitch to fetch.
+     */
+    where?: PitchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pitches to fetch.
+     */
+    orderBy?: PitchOrderByWithRelationInput | PitchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pitches.
+     */
+    cursor?: PitchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pitches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pitches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pitches.
+     */
+    distinct?: PitchScalarFieldEnum | PitchScalarFieldEnum[]
+  }
+
+  /**
+   * Pitch findFirstOrThrow
+   */
+  export type PitchFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * Filter, which Pitch to fetch.
+     */
+    where?: PitchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pitches to fetch.
+     */
+    orderBy?: PitchOrderByWithRelationInput | PitchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pitches.
+     */
+    cursor?: PitchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pitches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pitches.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pitches.
+     */
+    distinct?: PitchScalarFieldEnum | PitchScalarFieldEnum[]
+  }
+
+  /**
+   * Pitch findMany
+   */
+  export type PitchFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * Filter, which Pitches to fetch.
+     */
+    where?: PitchWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pitches to fetch.
+     */
+    orderBy?: PitchOrderByWithRelationInput | PitchOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Pitches.
+     */
+    cursor?: PitchWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pitches from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pitches.
+     */
+    skip?: number
+    distinct?: PitchScalarFieldEnum | PitchScalarFieldEnum[]
+  }
+
+  /**
+   * Pitch create
+   */
+  export type PitchCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Pitch.
+     */
+    data: XOR<PitchCreateInput, PitchUncheckedCreateInput>
+  }
+
+  /**
+   * Pitch createMany
+   */
+  export type PitchCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Pitches.
+     */
+    data: PitchCreateManyInput | PitchCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Pitch createManyAndReturn
+   */
+  export type PitchCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * The data used to create many Pitches.
+     */
+    data: PitchCreateManyInput | PitchCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Pitch update
+   */
+  export type PitchUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Pitch.
+     */
+    data: XOR<PitchUpdateInput, PitchUncheckedUpdateInput>
+    /**
+     * Choose, which Pitch to update.
+     */
+    where: PitchWhereUniqueInput
+  }
+
+  /**
+   * Pitch updateMany
+   */
+  export type PitchUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Pitches.
+     */
+    data: XOR<PitchUpdateManyMutationInput, PitchUncheckedUpdateManyInput>
+    /**
+     * Filter which Pitches to update
+     */
+    where?: PitchWhereInput
+    /**
+     * Limit how many Pitches to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Pitch updateManyAndReturn
+   */
+  export type PitchUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * The data used to update Pitches.
+     */
+    data: XOR<PitchUpdateManyMutationInput, PitchUncheckedUpdateManyInput>
+    /**
+     * Filter which Pitches to update
+     */
+    where?: PitchWhereInput
+    /**
+     * Limit how many Pitches to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Pitch upsert
+   */
+  export type PitchUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Pitch to update in case it exists.
+     */
+    where: PitchWhereUniqueInput
+    /**
+     * In case the Pitch found by the `where` argument doesn't exist, create a new Pitch with this data.
+     */
+    create: XOR<PitchCreateInput, PitchUncheckedCreateInput>
+    /**
+     * In case the Pitch was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PitchUpdateInput, PitchUncheckedUpdateInput>
+  }
+
+  /**
+   * Pitch delete
+   */
+  export type PitchDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+    /**
+     * Filter which Pitch to delete.
+     */
+    where: PitchWhereUniqueInput
+  }
+
+  /**
+   * Pitch deleteMany
+   */
+  export type PitchDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pitches to delete
+     */
+    where?: PitchWhereInput
+    /**
+     * Limit how many Pitches to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Pitch.interactions
+   */
+  export type Pitch$interactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Interaction
+     */
+    select?: InteractionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Interaction
+     */
+    omit?: InteractionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InteractionInclude<ExtArgs> | null
+    where?: InteractionWhereInput
+    orderBy?: InteractionOrderByWithRelationInput | InteractionOrderByWithRelationInput[]
+    cursor?: InteractionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InteractionScalarFieldEnum | InteractionScalarFieldEnum[]
+  }
+
+  /**
+   * Pitch without action
+   */
+  export type PitchDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pitch
+     */
+    select?: PitchSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Pitch
+     */
+    omit?: PitchOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PitchInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7044,6 +9600,35 @@ export namespace Prisma {
   };
 
   export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+  export const InteractionScalarFieldEnum: {
+    id: 'id',
+    pitchId: 'pitchId',
+    userId: 'userId',
+    type: 'type',
+    status: 'status',
+    createdAt: 'createdAt'
+  };
+
+  export type InteractionScalarFieldEnum = (typeof InteractionScalarFieldEnum)[keyof typeof InteractionScalarFieldEnum]
+
+
+  export const PitchScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    title: 'title',
+    description: 'description',
+    deckUrl: 'deckUrl',
+    solutionUrl: 'solutionUrl',
+    marketSize: 'marketSize',
+    traction: 'traction',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PitchScalarFieldEnum = (typeof PitchScalarFieldEnum)[keyof typeof PitchScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7192,6 +9777,8 @@ export namespace Prisma {
     verification?: XOR<VerificationNullableScalarRelationFilter, VerificationWhereInput> | null
     startup?: XOR<StartupNullableScalarRelationFilter, StartupWhereInput> | null
     investor?: XOR<InvestorNullableScalarRelationFilter, InvestorWhereInput> | null
+    pitches?: PitchListRelationFilter
+    interactions?: InteractionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -7205,6 +9792,8 @@ export namespace Prisma {
     verification?: VerificationOrderByWithRelationInput
     startup?: StartupOrderByWithRelationInput
     investor?: InvestorOrderByWithRelationInput
+    pitches?: PitchOrderByRelationAggregateInput
+    interactions?: InteractionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7221,6 +9810,8 @@ export namespace Prisma {
     verification?: XOR<VerificationNullableScalarRelationFilter, VerificationWhereInput> | null
     startup?: XOR<StartupNullableScalarRelationFilter, StartupWhereInput> | null
     investor?: XOR<InvestorNullableScalarRelationFilter, InvestorWhereInput> | null
+    pitches?: PitchListRelationFilter
+    interactions?: InteractionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -7543,6 +10134,157 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
   }
 
+  export type InteractionWhereInput = {
+    AND?: InteractionWhereInput | InteractionWhereInput[]
+    OR?: InteractionWhereInput[]
+    NOT?: InteractionWhereInput | InteractionWhereInput[]
+    id?: StringFilter<"Interaction"> | string
+    pitchId?: StringFilter<"Interaction"> | string
+    userId?: StringFilter<"Interaction"> | string
+    type?: StringFilter<"Interaction"> | string
+    status?: StringFilter<"Interaction"> | string
+    createdAt?: DateTimeFilter<"Interaction"> | Date | string
+    pitch?: XOR<PitchScalarRelationFilter, PitchWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type InteractionOrderByWithRelationInput = {
+    id?: SortOrder
+    pitchId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    pitch?: PitchOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type InteractionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InteractionWhereInput | InteractionWhereInput[]
+    OR?: InteractionWhereInput[]
+    NOT?: InteractionWhereInput | InteractionWhereInput[]
+    pitchId?: StringFilter<"Interaction"> | string
+    userId?: StringFilter<"Interaction"> | string
+    type?: StringFilter<"Interaction"> | string
+    status?: StringFilter<"Interaction"> | string
+    createdAt?: DateTimeFilter<"Interaction"> | Date | string
+    pitch?: XOR<PitchScalarRelationFilter, PitchWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type InteractionOrderByWithAggregationInput = {
+    id?: SortOrder
+    pitchId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    _count?: InteractionCountOrderByAggregateInput
+    _max?: InteractionMaxOrderByAggregateInput
+    _min?: InteractionMinOrderByAggregateInput
+  }
+
+  export type InteractionScalarWhereWithAggregatesInput = {
+    AND?: InteractionScalarWhereWithAggregatesInput | InteractionScalarWhereWithAggregatesInput[]
+    OR?: InteractionScalarWhereWithAggregatesInput[]
+    NOT?: InteractionScalarWhereWithAggregatesInput | InteractionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Interaction"> | string
+    pitchId?: StringWithAggregatesFilter<"Interaction"> | string
+    userId?: StringWithAggregatesFilter<"Interaction"> | string
+    type?: StringWithAggregatesFilter<"Interaction"> | string
+    status?: StringWithAggregatesFilter<"Interaction"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Interaction"> | Date | string
+  }
+
+  export type PitchWhereInput = {
+    AND?: PitchWhereInput | PitchWhereInput[]
+    OR?: PitchWhereInput[]
+    NOT?: PitchWhereInput | PitchWhereInput[]
+    id?: StringFilter<"Pitch"> | string
+    userId?: StringFilter<"Pitch"> | string
+    title?: StringFilter<"Pitch"> | string
+    description?: StringFilter<"Pitch"> | string
+    deckUrl?: StringNullableFilter<"Pitch"> | string | null
+    solutionUrl?: StringNullableFilter<"Pitch"> | string | null
+    marketSize?: StringNullableFilter<"Pitch"> | string | null
+    traction?: StringNullableFilter<"Pitch"> | string | null
+    status?: StringFilter<"Pitch"> | string
+    createdAt?: DateTimeFilter<"Pitch"> | Date | string
+    updatedAt?: DateTimeFilter<"Pitch"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    interactions?: InteractionListRelationFilter
+  }
+
+  export type PitchOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    deckUrl?: SortOrderInput | SortOrder
+    solutionUrl?: SortOrderInput | SortOrder
+    marketSize?: SortOrderInput | SortOrder
+    traction?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    interactions?: InteractionOrderByRelationAggregateInput
+  }
+
+  export type PitchWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PitchWhereInput | PitchWhereInput[]
+    OR?: PitchWhereInput[]
+    NOT?: PitchWhereInput | PitchWhereInput[]
+    userId?: StringFilter<"Pitch"> | string
+    title?: StringFilter<"Pitch"> | string
+    description?: StringFilter<"Pitch"> | string
+    deckUrl?: StringNullableFilter<"Pitch"> | string | null
+    solutionUrl?: StringNullableFilter<"Pitch"> | string | null
+    marketSize?: StringNullableFilter<"Pitch"> | string | null
+    traction?: StringNullableFilter<"Pitch"> | string | null
+    status?: StringFilter<"Pitch"> | string
+    createdAt?: DateTimeFilter<"Pitch"> | Date | string
+    updatedAt?: DateTimeFilter<"Pitch"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    interactions?: InteractionListRelationFilter
+  }, "id">
+
+  export type PitchOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    deckUrl?: SortOrderInput | SortOrder
+    solutionUrl?: SortOrderInput | SortOrder
+    marketSize?: SortOrderInput | SortOrder
+    traction?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PitchCountOrderByAggregateInput
+    _max?: PitchMaxOrderByAggregateInput
+    _min?: PitchMinOrderByAggregateInput
+  }
+
+  export type PitchScalarWhereWithAggregatesInput = {
+    AND?: PitchScalarWhereWithAggregatesInput | PitchScalarWhereWithAggregatesInput[]
+    OR?: PitchScalarWhereWithAggregatesInput[]
+    NOT?: PitchScalarWhereWithAggregatesInput | PitchScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Pitch"> | string
+    userId?: StringWithAggregatesFilter<"Pitch"> | string
+    title?: StringWithAggregatesFilter<"Pitch"> | string
+    description?: StringWithAggregatesFilter<"Pitch"> | string
+    deckUrl?: StringNullableWithAggregatesFilter<"Pitch"> | string | null
+    solutionUrl?: StringNullableWithAggregatesFilter<"Pitch"> | string | null
+    marketSize?: StringNullableWithAggregatesFilter<"Pitch"> | string | null
+    traction?: StringNullableWithAggregatesFilter<"Pitch"> | string | null
+    status?: StringWithAggregatesFilter<"Pitch"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Pitch"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Pitch"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name: string
@@ -7554,6 +10296,8 @@ export namespace Prisma {
     verification?: VerificationCreateNestedOneWithoutUserInput
     startup?: StartupCreateNestedOneWithoutUserInput
     investor?: InvestorCreateNestedOneWithoutUserInput
+    pitches?: PitchCreateNestedManyWithoutUserInput
+    interactions?: InteractionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7567,6 +10311,8 @@ export namespace Prisma {
     verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
     startup?: StartupUncheckedCreateNestedOneWithoutUserInput
     investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
+    pitches?: PitchUncheckedCreateNestedManyWithoutUserInput
+    interactions?: InteractionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7580,6 +10326,8 @@ export namespace Prisma {
     verification?: VerificationUpdateOneWithoutUserNestedInput
     startup?: StartupUpdateOneWithoutUserNestedInput
     investor?: InvestorUpdateOneWithoutUserNestedInput
+    pitches?: PitchUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7593,6 +10341,8 @@ export namespace Prisma {
     verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
     startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
     investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
+    pitches?: PitchUncheckedUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7936,6 +10686,168 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type InteractionCreateInput = {
+    id?: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+    pitch: PitchCreateNestedOneWithoutInteractionsInput
+    user: UserCreateNestedOneWithoutInteractionsInput
+  }
+
+  export type InteractionUncheckedCreateInput = {
+    id?: string
+    pitchId: string
+    userId: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type InteractionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pitch?: PitchUpdateOneRequiredWithoutInteractionsNestedInput
+    user?: UserUpdateOneRequiredWithoutInteractionsNestedInput
+  }
+
+  export type InteractionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pitchId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InteractionCreateManyInput = {
+    id?: string
+    pitchId: string
+    userId: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type InteractionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InteractionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pitchId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PitchCreateInput = {
+    id?: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPitchesInput
+    interactions?: InteractionCreateNestedManyWithoutPitchInput
+  }
+
+  export type PitchUncheckedCreateInput = {
+    id?: string
+    userId: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: InteractionUncheckedCreateNestedManyWithoutPitchInput
+  }
+
+  export type PitchUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPitchesNestedInput
+    interactions?: InteractionUpdateManyWithoutPitchNestedInput
+  }
+
+  export type PitchUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: InteractionUncheckedUpdateManyWithoutPitchNestedInput
+  }
+
+  export type PitchCreateManyInput = {
+    id?: string
+    userId: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PitchUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PitchUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7982,6 +10894,26 @@ export namespace Prisma {
   export type InvestorNullableScalarRelationFilter = {
     is?: InvestorWhereInput | null
     isNot?: InvestorWhereInput | null
+  }
+
+  export type PitchListRelationFilter = {
+    every?: PitchWhereInput
+    some?: PitchWhereInput
+    none?: PitchWhereInput
+  }
+
+  export type InteractionListRelationFilter = {
+    every?: InteractionWhereInput
+    some?: InteractionWhereInput
+    none?: InteractionWhereInput
+  }
+
+  export type PitchOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InteractionOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -8377,6 +11309,80 @@ export namespace Prisma {
     matchScore?: SortOrder
   }
 
+  export type PitchScalarRelationFilter = {
+    is?: PitchWhereInput
+    isNot?: PitchWhereInput
+  }
+
+  export type InteractionCountOrderByAggregateInput = {
+    id?: SortOrder
+    pitchId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InteractionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    pitchId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InteractionMinOrderByAggregateInput = {
+    id?: SortOrder
+    pitchId?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PitchCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    deckUrl?: SortOrder
+    solutionUrl?: SortOrder
+    marketSize?: SortOrder
+    traction?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PitchMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    deckUrl?: SortOrder
+    solutionUrl?: SortOrder
+    marketSize?: SortOrder
+    traction?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PitchMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    deckUrl?: SortOrder
+    solutionUrl?: SortOrder
+    marketSize?: SortOrder
+    traction?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type VerificationCreateNestedOneWithoutUserInput = {
     create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
     connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
@@ -8395,6 +11401,20 @@ export namespace Prisma {
     connect?: InvestorWhereUniqueInput
   }
 
+  export type PitchCreateNestedManyWithoutUserInput = {
+    create?: XOR<PitchCreateWithoutUserInput, PitchUncheckedCreateWithoutUserInput> | PitchCreateWithoutUserInput[] | PitchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PitchCreateOrConnectWithoutUserInput | PitchCreateOrConnectWithoutUserInput[]
+    createMany?: PitchCreateManyUserInputEnvelope
+    connect?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+  }
+
+  export type InteractionCreateNestedManyWithoutUserInput = {
+    create?: XOR<InteractionCreateWithoutUserInput, InteractionUncheckedCreateWithoutUserInput> | InteractionCreateWithoutUserInput[] | InteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutUserInput | InteractionCreateOrConnectWithoutUserInput[]
+    createMany?: InteractionCreateManyUserInputEnvelope
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+  }
+
   export type VerificationUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
     connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
@@ -8411,6 +11431,20 @@ export namespace Prisma {
     create?: XOR<InvestorCreateWithoutUserInput, InvestorUncheckedCreateWithoutUserInput>
     connectOrCreate?: InvestorCreateOrConnectWithoutUserInput
     connect?: InvestorWhereUniqueInput
+  }
+
+  export type PitchUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PitchCreateWithoutUserInput, PitchUncheckedCreateWithoutUserInput> | PitchCreateWithoutUserInput[] | PitchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PitchCreateOrConnectWithoutUserInput | PitchCreateOrConnectWithoutUserInput[]
+    createMany?: PitchCreateManyUserInputEnvelope
+    connect?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+  }
+
+  export type InteractionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<InteractionCreateWithoutUserInput, InteractionUncheckedCreateWithoutUserInput> | InteractionCreateWithoutUserInput[] | InteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutUserInput | InteractionCreateOrConnectWithoutUserInput[]
+    createMany?: InteractionCreateManyUserInputEnvelope
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8455,6 +11489,34 @@ export namespace Prisma {
     update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutUserInput, InvestorUpdateWithoutUserInput>, InvestorUncheckedUpdateWithoutUserInput>
   }
 
+  export type PitchUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PitchCreateWithoutUserInput, PitchUncheckedCreateWithoutUserInput> | PitchCreateWithoutUserInput[] | PitchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PitchCreateOrConnectWithoutUserInput | PitchCreateOrConnectWithoutUserInput[]
+    upsert?: PitchUpsertWithWhereUniqueWithoutUserInput | PitchUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PitchCreateManyUserInputEnvelope
+    set?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    disconnect?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    delete?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    connect?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    update?: PitchUpdateWithWhereUniqueWithoutUserInput | PitchUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PitchUpdateManyWithWhereWithoutUserInput | PitchUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PitchScalarWhereInput | PitchScalarWhereInput[]
+  }
+
+  export type InteractionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InteractionCreateWithoutUserInput, InteractionUncheckedCreateWithoutUserInput> | InteractionCreateWithoutUserInput[] | InteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutUserInput | InteractionCreateOrConnectWithoutUserInput[]
+    upsert?: InteractionUpsertWithWhereUniqueWithoutUserInput | InteractionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InteractionCreateManyUserInputEnvelope
+    set?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    disconnect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    delete?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    update?: InteractionUpdateWithWhereUniqueWithoutUserInput | InteractionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InteractionUpdateManyWithWhereWithoutUserInput | InteractionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InteractionScalarWhereInput | InteractionScalarWhereInput[]
+  }
+
   export type VerificationUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
     connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
@@ -8483,6 +11545,34 @@ export namespace Prisma {
     delete?: InvestorWhereInput | boolean
     connect?: InvestorWhereUniqueInput
     update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutUserInput, InvestorUpdateWithoutUserInput>, InvestorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PitchUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PitchCreateWithoutUserInput, PitchUncheckedCreateWithoutUserInput> | PitchCreateWithoutUserInput[] | PitchUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PitchCreateOrConnectWithoutUserInput | PitchCreateOrConnectWithoutUserInput[]
+    upsert?: PitchUpsertWithWhereUniqueWithoutUserInput | PitchUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PitchCreateManyUserInputEnvelope
+    set?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    disconnect?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    delete?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    connect?: PitchWhereUniqueInput | PitchWhereUniqueInput[]
+    update?: PitchUpdateWithWhereUniqueWithoutUserInput | PitchUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PitchUpdateManyWithWhereWithoutUserInput | PitchUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PitchScalarWhereInput | PitchScalarWhereInput[]
+  }
+
+  export type InteractionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<InteractionCreateWithoutUserInput, InteractionUncheckedCreateWithoutUserInput> | InteractionCreateWithoutUserInput[] | InteractionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutUserInput | InteractionCreateOrConnectWithoutUserInput[]
+    upsert?: InteractionUpsertWithWhereUniqueWithoutUserInput | InteractionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: InteractionCreateManyUserInputEnvelope
+    set?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    disconnect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    delete?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    update?: InteractionUpdateWithWhereUniqueWithoutUserInput | InteractionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: InteractionUpdateManyWithWhereWithoutUserInput | InteractionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: InteractionScalarWhereInput | InteractionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutVerificationInput = {
@@ -8662,6 +11752,90 @@ export namespace Prisma {
     upsert?: InvestorUpsertWithoutMatchInput
     connect?: InvestorWhereUniqueInput
     update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutMatchInput, InvestorUpdateWithoutMatchInput>, InvestorUncheckedUpdateWithoutMatchInput>
+  }
+
+  export type PitchCreateNestedOneWithoutInteractionsInput = {
+    create?: XOR<PitchCreateWithoutInteractionsInput, PitchUncheckedCreateWithoutInteractionsInput>
+    connectOrCreate?: PitchCreateOrConnectWithoutInteractionsInput
+    connect?: PitchWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutInteractionsInput = {
+    create?: XOR<UserCreateWithoutInteractionsInput, UserUncheckedCreateWithoutInteractionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInteractionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PitchUpdateOneRequiredWithoutInteractionsNestedInput = {
+    create?: XOR<PitchCreateWithoutInteractionsInput, PitchUncheckedCreateWithoutInteractionsInput>
+    connectOrCreate?: PitchCreateOrConnectWithoutInteractionsInput
+    upsert?: PitchUpsertWithoutInteractionsInput
+    connect?: PitchWhereUniqueInput
+    update?: XOR<XOR<PitchUpdateToOneWithWhereWithoutInteractionsInput, PitchUpdateWithoutInteractionsInput>, PitchUncheckedUpdateWithoutInteractionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutInteractionsNestedInput = {
+    create?: XOR<UserCreateWithoutInteractionsInput, UserUncheckedCreateWithoutInteractionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInteractionsInput
+    upsert?: UserUpsertWithoutInteractionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInteractionsInput, UserUpdateWithoutInteractionsInput>, UserUncheckedUpdateWithoutInteractionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutPitchesInput = {
+    create?: XOR<UserCreateWithoutPitchesInput, UserUncheckedCreateWithoutPitchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPitchesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type InteractionCreateNestedManyWithoutPitchInput = {
+    create?: XOR<InteractionCreateWithoutPitchInput, InteractionUncheckedCreateWithoutPitchInput> | InteractionCreateWithoutPitchInput[] | InteractionUncheckedCreateWithoutPitchInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutPitchInput | InteractionCreateOrConnectWithoutPitchInput[]
+    createMany?: InteractionCreateManyPitchInputEnvelope
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+  }
+
+  export type InteractionUncheckedCreateNestedManyWithoutPitchInput = {
+    create?: XOR<InteractionCreateWithoutPitchInput, InteractionUncheckedCreateWithoutPitchInput> | InteractionCreateWithoutPitchInput[] | InteractionUncheckedCreateWithoutPitchInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutPitchInput | InteractionCreateOrConnectWithoutPitchInput[]
+    createMany?: InteractionCreateManyPitchInputEnvelope
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutPitchesNestedInput = {
+    create?: XOR<UserCreateWithoutPitchesInput, UserUncheckedCreateWithoutPitchesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPitchesInput
+    upsert?: UserUpsertWithoutPitchesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPitchesInput, UserUpdateWithoutPitchesInput>, UserUncheckedUpdateWithoutPitchesInput>
+  }
+
+  export type InteractionUpdateManyWithoutPitchNestedInput = {
+    create?: XOR<InteractionCreateWithoutPitchInput, InteractionUncheckedCreateWithoutPitchInput> | InteractionCreateWithoutPitchInput[] | InteractionUncheckedCreateWithoutPitchInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutPitchInput | InteractionCreateOrConnectWithoutPitchInput[]
+    upsert?: InteractionUpsertWithWhereUniqueWithoutPitchInput | InteractionUpsertWithWhereUniqueWithoutPitchInput[]
+    createMany?: InteractionCreateManyPitchInputEnvelope
+    set?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    disconnect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    delete?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    update?: InteractionUpdateWithWhereUniqueWithoutPitchInput | InteractionUpdateWithWhereUniqueWithoutPitchInput[]
+    updateMany?: InteractionUpdateManyWithWhereWithoutPitchInput | InteractionUpdateManyWithWhereWithoutPitchInput[]
+    deleteMany?: InteractionScalarWhereInput | InteractionScalarWhereInput[]
+  }
+
+  export type InteractionUncheckedUpdateManyWithoutPitchNestedInput = {
+    create?: XOR<InteractionCreateWithoutPitchInput, InteractionUncheckedCreateWithoutPitchInput> | InteractionCreateWithoutPitchInput[] | InteractionUncheckedCreateWithoutPitchInput[]
+    connectOrCreate?: InteractionCreateOrConnectWithoutPitchInput | InteractionCreateOrConnectWithoutPitchInput[]
+    upsert?: InteractionUpsertWithWhereUniqueWithoutPitchInput | InteractionUpsertWithWhereUniqueWithoutPitchInput[]
+    createMany?: InteractionCreateManyPitchInputEnvelope
+    set?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    disconnect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    delete?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    connect?: InteractionWhereUniqueInput | InteractionWhereUniqueInput[]
+    update?: InteractionUpdateWithWhereUniqueWithoutPitchInput | InteractionUpdateWithWhereUniqueWithoutPitchInput[]
+    updateMany?: InteractionUpdateManyWithWhereWithoutPitchInput | InteractionUpdateManyWithWhereWithoutPitchInput[]
+    deleteMany?: InteractionScalarWhereInput | InteractionScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -8946,6 +12120,70 @@ export namespace Prisma {
     create: XOR<InvestorCreateWithoutUserInput, InvestorUncheckedCreateWithoutUserInput>
   }
 
+  export type PitchCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: InteractionCreateNestedManyWithoutPitchInput
+  }
+
+  export type PitchUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interactions?: InteractionUncheckedCreateNestedManyWithoutPitchInput
+  }
+
+  export type PitchCreateOrConnectWithoutUserInput = {
+    where: PitchWhereUniqueInput
+    create: XOR<PitchCreateWithoutUserInput, PitchUncheckedCreateWithoutUserInput>
+  }
+
+  export type PitchCreateManyUserInputEnvelope = {
+    data: PitchCreateManyUserInput | PitchCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InteractionCreateWithoutUserInput = {
+    id?: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+    pitch: PitchCreateNestedOneWithoutInteractionsInput
+  }
+
+  export type InteractionUncheckedCreateWithoutUserInput = {
+    id?: string
+    pitchId: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type InteractionCreateOrConnectWithoutUserInput = {
+    where: InteractionWhereUniqueInput
+    create: XOR<InteractionCreateWithoutUserInput, InteractionUncheckedCreateWithoutUserInput>
+  }
+
+  export type InteractionCreateManyUserInputEnvelope = {
+    data: InteractionCreateManyUserInput | InteractionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type VerificationUpsertWithoutUserInput = {
     update: XOR<VerificationUpdateWithoutUserInput, VerificationUncheckedUpdateWithoutUserInput>
     create: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
@@ -9045,6 +12283,67 @@ export namespace Prisma {
     Match?: MatchUncheckedUpdateManyWithoutInvestorNestedInput
   }
 
+  export type PitchUpsertWithWhereUniqueWithoutUserInput = {
+    where: PitchWhereUniqueInput
+    update: XOR<PitchUpdateWithoutUserInput, PitchUncheckedUpdateWithoutUserInput>
+    create: XOR<PitchCreateWithoutUserInput, PitchUncheckedCreateWithoutUserInput>
+  }
+
+  export type PitchUpdateWithWhereUniqueWithoutUserInput = {
+    where: PitchWhereUniqueInput
+    data: XOR<PitchUpdateWithoutUserInput, PitchUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PitchUpdateManyWithWhereWithoutUserInput = {
+    where: PitchScalarWhereInput
+    data: XOR<PitchUpdateManyMutationInput, PitchUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PitchScalarWhereInput = {
+    AND?: PitchScalarWhereInput | PitchScalarWhereInput[]
+    OR?: PitchScalarWhereInput[]
+    NOT?: PitchScalarWhereInput | PitchScalarWhereInput[]
+    id?: StringFilter<"Pitch"> | string
+    userId?: StringFilter<"Pitch"> | string
+    title?: StringFilter<"Pitch"> | string
+    description?: StringFilter<"Pitch"> | string
+    deckUrl?: StringNullableFilter<"Pitch"> | string | null
+    solutionUrl?: StringNullableFilter<"Pitch"> | string | null
+    marketSize?: StringNullableFilter<"Pitch"> | string | null
+    traction?: StringNullableFilter<"Pitch"> | string | null
+    status?: StringFilter<"Pitch"> | string
+    createdAt?: DateTimeFilter<"Pitch"> | Date | string
+    updatedAt?: DateTimeFilter<"Pitch"> | Date | string
+  }
+
+  export type InteractionUpsertWithWhereUniqueWithoutUserInput = {
+    where: InteractionWhereUniqueInput
+    update: XOR<InteractionUpdateWithoutUserInput, InteractionUncheckedUpdateWithoutUserInput>
+    create: XOR<InteractionCreateWithoutUserInput, InteractionUncheckedCreateWithoutUserInput>
+  }
+
+  export type InteractionUpdateWithWhereUniqueWithoutUserInput = {
+    where: InteractionWhereUniqueInput
+    data: XOR<InteractionUpdateWithoutUserInput, InteractionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type InteractionUpdateManyWithWhereWithoutUserInput = {
+    where: InteractionScalarWhereInput
+    data: XOR<InteractionUpdateManyMutationInput, InteractionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type InteractionScalarWhereInput = {
+    AND?: InteractionScalarWhereInput | InteractionScalarWhereInput[]
+    OR?: InteractionScalarWhereInput[]
+    NOT?: InteractionScalarWhereInput | InteractionScalarWhereInput[]
+    id?: StringFilter<"Interaction"> | string
+    pitchId?: StringFilter<"Interaction"> | string
+    userId?: StringFilter<"Interaction"> | string
+    type?: StringFilter<"Interaction"> | string
+    status?: StringFilter<"Interaction"> | string
+    createdAt?: DateTimeFilter<"Interaction"> | Date | string
+  }
+
   export type UserCreateWithoutVerificationInput = {
     id?: string
     name: string
@@ -9055,6 +12354,8 @@ export namespace Prisma {
     createdAt?: Date | string
     startup?: StartupCreateNestedOneWithoutUserInput
     investor?: InvestorCreateNestedOneWithoutUserInput
+    pitches?: PitchCreateNestedManyWithoutUserInput
+    interactions?: InteractionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVerificationInput = {
@@ -9067,6 +12368,8 @@ export namespace Prisma {
     createdAt?: Date | string
     startup?: StartupUncheckedCreateNestedOneWithoutUserInput
     investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
+    pitches?: PitchUncheckedCreateNestedManyWithoutUserInput
+    interactions?: InteractionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVerificationInput = {
@@ -9095,6 +12398,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startup?: StartupUpdateOneWithoutUserNestedInput
     investor?: InvestorUpdateOneWithoutUserNestedInput
+    pitches?: PitchUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerificationInput = {
@@ -9107,6 +12412,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
     investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
+    pitches?: PitchUncheckedUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutStartupInput = {
@@ -9119,6 +12426,8 @@ export namespace Prisma {
     createdAt?: Date | string
     verification?: VerificationCreateNestedOneWithoutUserInput
     investor?: InvestorCreateNestedOneWithoutUserInput
+    pitches?: PitchCreateNestedManyWithoutUserInput
+    interactions?: InteractionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStartupInput = {
@@ -9131,6 +12440,8 @@ export namespace Prisma {
     createdAt?: Date | string
     verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
     investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
+    pitches?: PitchUncheckedCreateNestedManyWithoutUserInput
+    interactions?: InteractionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStartupInput = {
@@ -9187,6 +12498,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     verification?: VerificationUpdateOneWithoutUserNestedInput
     investor?: InvestorUpdateOneWithoutUserNestedInput
+    pitches?: PitchUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStartupInput = {
@@ -9199,6 +12512,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
     investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
+    pitches?: PitchUncheckedUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MatchUpsertWithWhereUniqueWithoutStartupInput = {
@@ -9240,6 +12555,8 @@ export namespace Prisma {
     createdAt?: Date | string
     verification?: VerificationCreateNestedOneWithoutUserInput
     startup?: StartupCreateNestedOneWithoutUserInput
+    pitches?: PitchCreateNestedManyWithoutUserInput
+    interactions?: InteractionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInvestorInput = {
@@ -9252,6 +12569,8 @@ export namespace Prisma {
     createdAt?: Date | string
     verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
     startup?: StartupUncheckedCreateNestedOneWithoutUserInput
+    pitches?: PitchUncheckedCreateNestedManyWithoutUserInput
+    interactions?: InteractionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInvestorInput = {
@@ -9308,6 +12627,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     verification?: VerificationUpdateOneWithoutUserNestedInput
     startup?: StartupUpdateOneWithoutUserNestedInput
+    pitches?: PitchUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInvestorInput = {
@@ -9320,6 +12641,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
     startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
+    pitches?: PitchUncheckedUpdateManyWithoutUserNestedInput
+    interactions?: InteractionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MatchUpsertWithWhereUniqueWithoutInvestorInput = {
@@ -9466,6 +12789,350 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PitchCreateWithoutInteractionsInput = {
+    id?: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPitchesInput
+  }
+
+  export type PitchUncheckedCreateWithoutInteractionsInput = {
+    id?: string
+    userId: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PitchCreateOrConnectWithoutInteractionsInput = {
+    where: PitchWhereUniqueInput
+    create: XOR<PitchCreateWithoutInteractionsInput, PitchUncheckedCreateWithoutInteractionsInput>
+  }
+
+  export type UserCreateWithoutInteractionsInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
+    createdAt?: Date | string
+    verification?: VerificationCreateNestedOneWithoutUserInput
+    startup?: StartupCreateNestedOneWithoutUserInput
+    investor?: InvestorCreateNestedOneWithoutUserInput
+    pitches?: PitchCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInteractionsInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
+    createdAt?: Date | string
+    verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
+    startup?: StartupUncheckedCreateNestedOneWithoutUserInput
+    investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
+    pitches?: PitchUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInteractionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInteractionsInput, UserUncheckedCreateWithoutInteractionsInput>
+  }
+
+  export type PitchUpsertWithoutInteractionsInput = {
+    update: XOR<PitchUpdateWithoutInteractionsInput, PitchUncheckedUpdateWithoutInteractionsInput>
+    create: XOR<PitchCreateWithoutInteractionsInput, PitchUncheckedCreateWithoutInteractionsInput>
+    where?: PitchWhereInput
+  }
+
+  export type PitchUpdateToOneWithWhereWithoutInteractionsInput = {
+    where?: PitchWhereInput
+    data: XOR<PitchUpdateWithoutInteractionsInput, PitchUncheckedUpdateWithoutInteractionsInput>
+  }
+
+  export type PitchUpdateWithoutInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPitchesNestedInput
+  }
+
+  export type PitchUncheckedUpdateWithoutInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutInteractionsInput = {
+    update: XOR<UserUpdateWithoutInteractionsInput, UserUncheckedUpdateWithoutInteractionsInput>
+    create: XOR<UserCreateWithoutInteractionsInput, UserUncheckedCreateWithoutInteractionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInteractionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInteractionsInput, UserUncheckedUpdateWithoutInteractionsInput>
+  }
+
+  export type UserUpdateWithoutInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUpdateOneWithoutUserNestedInput
+    startup?: StartupUpdateOneWithoutUserNestedInput
+    investor?: InvestorUpdateOneWithoutUserNestedInput
+    pitches?: PitchUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInteractionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
+    startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
+    investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
+    pitches?: PitchUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPitchesInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
+    createdAt?: Date | string
+    verification?: VerificationCreateNestedOneWithoutUserInput
+    startup?: StartupCreateNestedOneWithoutUserInput
+    investor?: InvestorCreateNestedOneWithoutUserInput
+    interactions?: InteractionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPitchesInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
+    createdAt?: Date | string
+    verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
+    startup?: StartupUncheckedCreateNestedOneWithoutUserInput
+    investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
+    interactions?: InteractionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPitchesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPitchesInput, UserUncheckedCreateWithoutPitchesInput>
+  }
+
+  export type InteractionCreateWithoutPitchInput = {
+    id?: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutInteractionsInput
+  }
+
+  export type InteractionUncheckedCreateWithoutPitchInput = {
+    id?: string
+    userId: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type InteractionCreateOrConnectWithoutPitchInput = {
+    where: InteractionWhereUniqueInput
+    create: XOR<InteractionCreateWithoutPitchInput, InteractionUncheckedCreateWithoutPitchInput>
+  }
+
+  export type InteractionCreateManyPitchInputEnvelope = {
+    data: InteractionCreateManyPitchInput | InteractionCreateManyPitchInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutPitchesInput = {
+    update: XOR<UserUpdateWithoutPitchesInput, UserUncheckedUpdateWithoutPitchesInput>
+    create: XOR<UserCreateWithoutPitchesInput, UserUncheckedCreateWithoutPitchesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPitchesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPitchesInput, UserUncheckedUpdateWithoutPitchesInput>
+  }
+
+  export type UserUpdateWithoutPitchesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUpdateOneWithoutUserNestedInput
+    startup?: StartupUpdateOneWithoutUserNestedInput
+    investor?: InvestorUpdateOneWithoutUserNestedInput
+    interactions?: InteractionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPitchesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
+    startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
+    investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
+    interactions?: InteractionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type InteractionUpsertWithWhereUniqueWithoutPitchInput = {
+    where: InteractionWhereUniqueInput
+    update: XOR<InteractionUpdateWithoutPitchInput, InteractionUncheckedUpdateWithoutPitchInput>
+    create: XOR<InteractionCreateWithoutPitchInput, InteractionUncheckedCreateWithoutPitchInput>
+  }
+
+  export type InteractionUpdateWithWhereUniqueWithoutPitchInput = {
+    where: InteractionWhereUniqueInput
+    data: XOR<InteractionUpdateWithoutPitchInput, InteractionUncheckedUpdateWithoutPitchInput>
+  }
+
+  export type InteractionUpdateManyWithWhereWithoutPitchInput = {
+    where: InteractionScalarWhereInput
+    data: XOR<InteractionUpdateManyMutationInput, InteractionUncheckedUpdateManyWithoutPitchInput>
+  }
+
+  export type PitchCreateManyUserInput = {
+    id?: string
+    title: string
+    description: string
+    deckUrl?: string | null
+    solutionUrl?: string | null
+    marketSize?: string | null
+    traction?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InteractionCreateManyUserInput = {
+    id?: string
+    pitchId: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type PitchUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: InteractionUpdateManyWithoutPitchNestedInput
+  }
+
+  export type PitchUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interactions?: InteractionUncheckedUpdateManyWithoutPitchNestedInput
+  }
+
+  export type PitchUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    deckUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    solutionUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    marketSize?: NullableStringFieldUpdateOperationsInput | string | null
+    traction?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InteractionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pitch?: PitchUpdateOneRequiredWithoutInteractionsNestedInput
+  }
+
+  export type InteractionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pitchId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InteractionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    pitchId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MatchCreateManyStartupInput = {
     id?: string
     investorId: string
@@ -9536,6 +13203,38 @@ export namespace Prisma {
     matchScore?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InteractionCreateManyPitchInput = {
+    id?: string
+    userId: string
+    type: string
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type InteractionUpdateWithoutPitchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutInteractionsNestedInput
+  }
+
+  export type InteractionUncheckedUpdateWithoutPitchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InteractionUncheckedUpdateManyWithoutPitchInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

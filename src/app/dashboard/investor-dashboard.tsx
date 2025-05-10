@@ -15,6 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import VerificationForm from "@/components/VerificationForm";
+import { prisma } from "@/lib/prisma";
+import PitchCard from "@/components/PitchCard";
 
 export default function InvestorDashboard() {
   const { data: session } = useSession();
@@ -35,7 +37,6 @@ export default function InvestorDashboard() {
           setInvestor(userInvestor);
         }
 
-        // Fetch matches
         const matchesRes = await fetch("/api/matches?type=investor");
         if (matchesRes.ok) {
           const matchesData = await matchesRes.json();
@@ -53,6 +54,43 @@ export default function InvestorDashboard() {
     }
   }, [session]);
 
+  const [pitches, setPitches] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchPitches = async () => {
+      const data = await fetch("/api/pitches", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => res.json());
+      setPitches(data);
+    };
+    fetchPitches();
+  }, []);
+
+  const handleConnect = async (pitchId: string) => {
+    try {
+      const response = await fetch("/api/interactions", {
+        method: "POST",
+        body: JSON.stringify({
+          pitchId,
+          userId: session?.user._id,
+          type: "INVESTOR_TO_STARTUP",
+          status: "PENDING",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to connect to pitch");
+      }
+    } catch (error: any) {
+      console.error("Error connecting to pitch:", error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -68,6 +106,20 @@ export default function InvestorDashboard() {
         <VerificationForm userId={session?.user._id as string} />
       </div>
     );
+  }
+  if (session?.user?.verificationStatus === "APPROVED") {
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Investor Dashboard</h1>
+      <div className="grid grid-cols-1 gap-4">
+        {pitches.map((pitch) => (
+          <PitchCard
+            key={pitch.id}
+            pitch={pitch}
+            onConnect={() => handleConnect(pitch.id)}
+          />
+        ))}
+      </div>
+    </div>;
   }
 
   return (

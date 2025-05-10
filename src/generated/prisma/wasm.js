@@ -174,6 +174,29 @@ exports.Prisma.MatchScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.InteractionScalarFieldEnum = {
+  id: 'id',
+  pitchId: 'pitchId',
+  userId: 'userId',
+  type: 'type',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PitchScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  deckUrl: 'deckUrl',
+  solutionUrl: 'solutionUrl',
+  marketSize: 'marketSize',
+  traction: 'traction',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -209,7 +232,9 @@ exports.Prisma.ModelName = {
   Verification: 'Verification',
   Startup: 'Startup',
   Investor: 'Investor',
-  Match: 'Match'
+  Match: 'Match',
+  Interaction: 'Interaction',
+  Pitch: 'Pitch'
 };
 
 /**

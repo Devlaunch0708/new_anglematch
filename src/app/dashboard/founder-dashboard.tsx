@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import VerificationForm from "@/components/VerificationForm";
+import PitchForm from "@/components/PitchForm";
 
 export default function FounderDashboard() {
   const { data: session } = useSession();
@@ -69,6 +70,13 @@ export default function FounderDashboard() {
         <VerificationForm userId={session?.user._id as string} />
       </div>
     );
+  }
+
+  if (session?.user?.verificationStatus === "APPROVED") {
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Founder Dashboard</h1>
+      <PitchForm userId={session?.user?._id as string} />
+    </div>;
   }
 
   return (

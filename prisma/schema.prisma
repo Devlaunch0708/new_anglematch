@@ -31,6 +31,8 @@ model User {
   startup            Startup?
   investor           Investor?
   createdAt          DateTime      @default(now())
+  pitches            Pitch[]
+  interactions       Interaction[] @relation("UserInteractions")
 }
 
 model Verification {
@@ -84,4 +86,31 @@ model Match {
   updatedAt  DateTime @updatedAt
 
   @@unique([startupId, investorId])
+}
+
+model Interaction {
+  id        String   @id @default(uuid())
+  pitchId   String
+  pitch     Pitch    @relation("PitchInteractions", fields: [pitchId], references: [id])
+  userId    String
+  user      User     @relation("UserInteractions", fields: [userId], references: [id])
+  type      String // INVESTOR_TO_STARTUP, STARTUP_TO_INVESTOR
+  status    String   @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  createdAt DateTime @default(now())
+}
+
+model Pitch {
+  id           String        @id @default(uuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  title        String
+  description  String
+  deckUrl      String? // Supabase Storage path
+  solutionUrl  String?
+  marketSize   String?
+  traction     String?
+  status       String        @default("DRAFT") // DRAFT, PUBLISHED
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  interactions Interaction[] @relation("PitchInteractions")
 }
