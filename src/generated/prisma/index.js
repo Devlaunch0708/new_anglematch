@@ -223,11 +223,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://angle_io_owner:npg_eOiXNC7IS0oc@ep-small-fire-a1wmj0ui-pooler.ap-southeast-1.aws.neon.tech/angle_io?sslmode=require"
+        "value": null
       }
     }
   },

@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import FounderDashboard from "./founder-dashboard";
 import InvestorDashboard from "./investor-dashboard";
+import AdminDashboard from "./admin";
 
 export default async function DashboardPage() {
   const user = await getCurrentUser();
@@ -12,7 +13,13 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen">
-      {user.role === "FOUNDER" ? <FounderDashboard /> : <InvestorDashboard />}
+      {user.role === "ADMIN" ? (
+        <AdminDashboard />
+      ) : user.role === "FOUNDER" ? (
+        <FounderDashboard />
+      ) : (
+        <InvestorDashboard />
+      )}
     </div>
   );
 }
