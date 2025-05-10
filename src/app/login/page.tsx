@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,7 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { signInWithEmail } from "@/lib/supabase/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -33,15 +32,15 @@ export default function LoginPage() {
     },
   });
 
-  const onSubmit = async (formdata: { email: string; password: string }) => {
+  const onSubmit = async (data: { email: string; password: string }) => {
     try {
-      const { data, error } = await signInWithEmail(
-        formdata.email,
-        formdata.password
-      );
+      const result = await signIn("credentials", {
+        ...data,
+        redirect: false,
+      });
 
-      if (error) {
-        setError(error.message);
+      if (result?.error) {
+        setError(result.error);
       } else {
         router.push("/dashboard");
       }

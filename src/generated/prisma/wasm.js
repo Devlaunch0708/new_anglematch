@@ -124,10 +124,20 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  emailVerified: 'emailVerified',
   role: 'role',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  verificationStatus: 'verificationStatus',
+  password: 'password',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VerificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  documents: 'documents',
+  status: 'status',
+  notes: 'notes',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt'
 };
 
 exports.Prisma.StartupScalarFieldEnum = {
@@ -164,25 +174,24 @@ exports.Prisma.MatchScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.VerificationScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  documents: 'documents',
-  status: 'status',
-  submittedAt: 'submittedAt',
-  reviewedAt: 'reviewedAt',
-  adminNotes: 'adminNotes',
-  investorId: 'investorId'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -195,18 +204,12 @@ exports.UserRole = exports.$Enums.UserRole = {
   ADMIN: 'ADMIN'
 };
 
-exports.Status = exports.$Enums.Status = {
-  pending: 'pending',
-  approved: 'approved',
-  rejected: 'rejected'
-};
-
 exports.Prisma.ModelName = {
   User: 'User',
+  Verification: 'Verification',
   Startup: 'Startup',
   Investor: 'Investor',
-  Match: 'Match',
-  Verification: 'Verification'
+  Match: 'Match'
 };
 
 /**

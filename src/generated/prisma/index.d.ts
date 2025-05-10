@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Verification
+ * 
+ */
+export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
+/**
  * Model Startup
  * 
  */
@@ -33,11 +38,6 @@ export type Investor = $Result.DefaultSelection<Prisma.$InvestorPayload>
  * 
  */
 export type Match = $Result.DefaultSelection<Prisma.$MatchPayload>
-/**
- * Model Verification
- * 
- */
-export type Verification = $Result.DefaultSelection<Prisma.$VerificationPayload>
 
 /**
  * Enums
@@ -51,24 +51,11 @@ export namespace $Enums {
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
-
-export const Status: {
-  pending: 'pending',
-  approved: 'approved',
-  rejected: 'rejected'
-};
-
-export type Status = (typeof Status)[keyof typeof Status]
-
 }
 
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
-
-export type Status = $Enums.Status
-
-export const Status: typeof $Enums.Status
 
 /**
  * ##  Prisma Client ʲˢ
@@ -206,6 +193,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.verification`: Exposes CRUD operations for the **Verification** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Verifications
+    * const verifications = await prisma.verification.findMany()
+    * ```
+    */
+  get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.startup`: Exposes CRUD operations for the **Startup** model.
     * Example usage:
     * ```ts
@@ -234,16 +231,6 @@ export class PrismaClient<
     * ```
     */
   get match(): Prisma.MatchDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.verification`: Exposes CRUD operations for the **Verification** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Verifications
-    * const verifications = await prisma.verification.findMany()
-    * ```
-    */
-  get verification(): Prisma.VerificationDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -685,10 +672,10 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Verification: 'Verification',
     Startup: 'Startup',
     Investor: 'Investor',
-    Match: 'Match',
-    Verification: 'Verification'
+    Match: 'Match'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -707,7 +694,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "startup" | "investor" | "match" | "verification"
+      modelProps: "user" | "verification" | "startup" | "investor" | "match"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -782,6 +769,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Verification: {
+        payload: Prisma.$VerificationPayload<ExtArgs>
+        fields: Prisma.VerificationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VerificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VerificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
+          }
+          findFirst: {
+            args: Prisma.VerificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VerificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
+          }
+          findMany: {
+            args: Prisma.VerificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>[]
+          }
+          create: {
+            args: Prisma.VerificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
+          }
+          createMany: {
+            args: Prisma.VerificationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VerificationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>[]
+          }
+          delete: {
+            args: Prisma.VerificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
+          }
+          update: {
+            args: Prisma.VerificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
+          }
+          deleteMany: {
+            args: Prisma.VerificationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VerificationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VerificationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>[]
+          }
+          upsert: {
+            args: Prisma.VerificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
+          }
+          aggregate: {
+            args: Prisma.VerificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVerification>
+          }
+          groupBy: {
+            args: Prisma.VerificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VerificationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VerificationCountArgs<ExtArgs>
+            result: $Utils.Optional<VerificationCountAggregateOutputType> | number
           }
         }
       }
@@ -1007,80 +1068,6 @@ export namespace Prisma {
           }
         }
       }
-      Verification: {
-        payload: Prisma.$VerificationPayload<ExtArgs>
-        fields: Prisma.VerificationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VerificationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VerificationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
-          }
-          findFirst: {
-            args: Prisma.VerificationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VerificationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
-          }
-          findMany: {
-            args: Prisma.VerificationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>[]
-          }
-          create: {
-            args: Prisma.VerificationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
-          }
-          createMany: {
-            args: Prisma.VerificationCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.VerificationCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>[]
-          }
-          delete: {
-            args: Prisma.VerificationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
-          }
-          update: {
-            args: Prisma.VerificationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
-          }
-          deleteMany: {
-            args: Prisma.VerificationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VerificationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.VerificationUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>[]
-          }
-          upsert: {
-            args: Prisma.VerificationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VerificationPayload>
-          }
-          aggregate: {
-            args: Prisma.VerificationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateVerification>
-          }
-          groupBy: {
-            args: Prisma.VerificationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<VerificationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VerificationCountArgs<ExtArgs>
-            result: $Utils.Optional<VerificationCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1166,10 +1153,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    verification?: VerificationOmit
     startup?: StartupOmit
     investor?: InvestorOmit
     match?: MatchOmit
-    verification?: VerificationOmit
   }
 
   /* Types for Logging */
@@ -1260,37 +1247,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    Verification: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Verification?: boolean | UserCountOutputTypeCountVerificationArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VerificationWhereInput
-  }
-
-
-  /**
    * Count Type StartupCountOutputType
    */
 
@@ -1327,12 +1283,10 @@ export namespace Prisma {
 
   export type InvestorCountOutputType = {
     Match: number
-    Verification: number
   }
 
   export type InvestorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Match?: boolean | InvestorCountOutputTypeCountMatchArgs
-    Verification?: boolean | InvestorCountOutputTypeCountVerificationArgs
   }
 
   // Custom InputTypes
@@ -1351,13 +1305,6 @@ export namespace Prisma {
    */
   export type InvestorCountOutputTypeCountMatchArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MatchWhereInput
-  }
-
-  /**
-   * InvestorCountOutputType without action
-   */
-  export type InvestorCountOutputTypeCountVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VerificationWhereInput
   }
 
 
@@ -1379,30 +1326,30 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
-    emailVerified: boolean | null
     role: $Enums.UserRole | null
+    verificationStatus: string | null
+    password: string | null
     createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: string | null
     name: string | null
     email: string | null
-    emailVerified: boolean | null
     role: $Enums.UserRole | null
+    verificationStatus: string | null
+    password: string | null
     createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     name: number
     email: number
-    emailVerified: number
     role: number
+    verificationStatus: number
+    password: number
     createdAt: number
-    updatedAt: number
     _all: number
   }
 
@@ -1411,30 +1358,30 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    emailVerified?: true
     role?: true
+    verificationStatus?: true
+    password?: true
     createdAt?: true
-    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     name?: true
     email?: true
-    emailVerified?: true
     role?: true
+    verificationStatus?: true
+    password?: true
     createdAt?: true
-    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     name?: true
     email?: true
-    emailVerified?: true
     role?: true
+    verificationStatus?: true
+    password?: true
     createdAt?: true
-    updatedAt?: true
     _all?: true
   }
 
@@ -1514,10 +1461,10 @@ export namespace Prisma {
     id: string
     name: string
     email: string
-    emailVerified: boolean
     role: $Enums.UserRole
+    verificationStatus: string
+    password: string
     createdAt: Date
-    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1541,52 +1488,50 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    emailVerified?: boolean
     role?: boolean
+    verificationStatus?: boolean
+    password?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
+    verification?: boolean | User$verificationArgs<ExtArgs>
     startup?: boolean | User$startupArgs<ExtArgs>
     investor?: boolean | User$investorArgs<ExtArgs>
-    Verification?: boolean | User$VerificationArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
-    emailVerified?: boolean
     role?: boolean
+    verificationStatus?: boolean
+    password?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
-    emailVerified?: boolean
     role?: boolean
+    verificationStatus?: boolean
+    password?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
     name?: boolean
     email?: boolean
-    emailVerified?: boolean
     role?: boolean
+    verificationStatus?: boolean
+    password?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "role" | "verificationStatus" | "password" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    verification?: boolean | User$verificationArgs<ExtArgs>
     startup?: boolean | User$startupArgs<ExtArgs>
     investor?: boolean | User$investorArgs<ExtArgs>
-    Verification?: boolean | User$VerificationArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1594,18 +1539,18 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      verification: Prisma.$VerificationPayload<ExtArgs> | null
       startup: Prisma.$StartupPayload<ExtArgs> | null
       investor: Prisma.$InvestorPayload<ExtArgs> | null
-      Verification: Prisma.$VerificationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       email: string
-      emailVerified: boolean
       role: $Enums.UserRole
+      verificationStatus: string
+      password: string
       createdAt: Date
-      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2000,9 +1945,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    verification<T extends User$verificationArgs<ExtArgs> = {}>(args?: Subset<T, User$verificationArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     startup<T extends User$startupArgs<ExtArgs> = {}>(args?: Subset<T, User$startupArgs<ExtArgs>>): Prisma__StartupClient<$Result.GetResult<Prisma.$StartupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     investor<T extends User$investorArgs<ExtArgs> = {}>(args?: Subset<T, User$investorArgs<ExtArgs>>): Prisma__InvestorClient<$Result.GetResult<Prisma.$InvestorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    Verification<T extends User$VerificationArgs<ExtArgs> = {}>(args?: Subset<T, User$VerificationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2035,10 +1980,10 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'String'>
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
-    readonly emailVerified: FieldRef<"User", 'Boolean'>
     readonly role: FieldRef<"User", 'UserRole'>
+    readonly verificationStatus: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2427,6 +2372,25 @@ export namespace Prisma {
   }
 
   /**
+   * User.verification
+   */
+  export type User$verificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    where?: VerificationWhereInput
+  }
+
+  /**
    * User.startup
    */
   export type User$startupArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2465,30 +2429,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.Verification
-   */
-  export type User$VerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    where?: VerificationWhereInput
-    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
-    cursor?: VerificationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
-  }
-
-  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2504,6 +2444,1086 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Verification
+   */
+
+  export type AggregateVerification = {
+    _count: VerificationCountAggregateOutputType | null
+    _min: VerificationMinAggregateOutputType | null
+    _max: VerificationMaxAggregateOutputType | null
+  }
+
+  export type VerificationMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    status: string | null
+    notes: string | null
+    submittedAt: Date | null
+    reviewedAt: Date | null
+  }
+
+  export type VerificationMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    status: string | null
+    notes: string | null
+    submittedAt: Date | null
+    reviewedAt: Date | null
+  }
+
+  export type VerificationCountAggregateOutputType = {
+    id: number
+    userId: number
+    documents: number
+    status: number
+    notes: number
+    submittedAt: number
+    reviewedAt: number
+    _all: number
+  }
+
+
+  export type VerificationMinAggregateInputType = {
+    id?: true
+    userId?: true
+    status?: true
+    notes?: true
+    submittedAt?: true
+    reviewedAt?: true
+  }
+
+  export type VerificationMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    status?: true
+    notes?: true
+    submittedAt?: true
+    reviewedAt?: true
+  }
+
+  export type VerificationCountAggregateInputType = {
+    id?: true
+    userId?: true
+    documents?: true
+    status?: true
+    notes?: true
+    submittedAt?: true
+    reviewedAt?: true
+    _all?: true
+  }
+
+  export type VerificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Verification to aggregate.
+     */
+    where?: VerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Verifications to fetch.
+     */
+    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Verifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Verifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Verifications
+    **/
+    _count?: true | VerificationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VerificationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VerificationMaxAggregateInputType
+  }
+
+  export type GetVerificationAggregateType<T extends VerificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateVerification]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVerification[P]>
+      : GetScalarType<T[P], AggregateVerification[P]>
+  }
+
+
+
+
+  export type VerificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VerificationWhereInput
+    orderBy?: VerificationOrderByWithAggregationInput | VerificationOrderByWithAggregationInput[]
+    by: VerificationScalarFieldEnum[] | VerificationScalarFieldEnum
+    having?: VerificationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VerificationCountAggregateInputType | true
+    _min?: VerificationMinAggregateInputType
+    _max?: VerificationMaxAggregateInputType
+  }
+
+  export type VerificationGroupByOutputType = {
+    id: string
+    userId: string
+    documents: JsonValue
+    status: string
+    notes: string | null
+    submittedAt: Date
+    reviewedAt: Date | null
+    _count: VerificationCountAggregateOutputType | null
+    _min: VerificationMinAggregateOutputType | null
+    _max: VerificationMaxAggregateOutputType | null
+  }
+
+  type GetVerificationGroupByPayload<T extends VerificationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VerificationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VerificationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VerificationGroupByOutputType[P]>
+            : GetScalarType<T[P], VerificationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    documents?: boolean
+    status?: boolean
+    notes?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["verification"]>
+
+  export type VerificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    documents?: boolean
+    status?: boolean
+    notes?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["verification"]>
+
+  export type VerificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    documents?: boolean
+    status?: boolean
+    notes?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["verification"]>
+
+  export type VerificationSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    documents?: boolean
+    status?: boolean
+    notes?: boolean
+    submittedAt?: boolean
+    reviewedAt?: boolean
+  }
+
+  export type VerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "documents" | "status" | "notes" | "submittedAt" | "reviewedAt", ExtArgs["result"]["verification"]>
+  export type VerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VerificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type VerificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $VerificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Verification"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      documents: Prisma.JsonValue
+      status: string
+      notes: string | null
+      submittedAt: Date
+      reviewedAt: Date | null
+    }, ExtArgs["result"]["verification"]>
+    composites: {}
+  }
+
+  type VerificationGetPayload<S extends boolean | null | undefined | VerificationDefaultArgs> = $Result.GetResult<Prisma.$VerificationPayload, S>
+
+  type VerificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VerificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VerificationCountAggregateInputType | true
+    }
+
+  export interface VerificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Verification'], meta: { name: 'Verification' } }
+    /**
+     * Find zero or one Verification that matches the filter.
+     * @param {VerificationFindUniqueArgs} args - Arguments to find a Verification
+     * @example
+     * // Get one Verification
+     * const verification = await prisma.verification.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VerificationFindUniqueArgs>(args: SelectSubset<T, VerificationFindUniqueArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Verification that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VerificationFindUniqueOrThrowArgs} args - Arguments to find a Verification
+     * @example
+     * // Get one Verification
+     * const verification = await prisma.verification.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VerificationFindUniqueOrThrowArgs>(args: SelectSubset<T, VerificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Verification that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationFindFirstArgs} args - Arguments to find a Verification
+     * @example
+     * // Get one Verification
+     * const verification = await prisma.verification.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VerificationFindFirstArgs>(args?: SelectSubset<T, VerificationFindFirstArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Verification that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationFindFirstOrThrowArgs} args - Arguments to find a Verification
+     * @example
+     * // Get one Verification
+     * const verification = await prisma.verification.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VerificationFindFirstOrThrowArgs>(args?: SelectSubset<T, VerificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Verifications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Verifications
+     * const verifications = await prisma.verification.findMany()
+     * 
+     * // Get first 10 Verifications
+     * const verifications = await prisma.verification.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const verificationWithIdOnly = await prisma.verification.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VerificationFindManyArgs>(args?: SelectSubset<T, VerificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Verification.
+     * @param {VerificationCreateArgs} args - Arguments to create a Verification.
+     * @example
+     * // Create one Verification
+     * const Verification = await prisma.verification.create({
+     *   data: {
+     *     // ... data to create a Verification
+     *   }
+     * })
+     * 
+     */
+    create<T extends VerificationCreateArgs>(args: SelectSubset<T, VerificationCreateArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Verifications.
+     * @param {VerificationCreateManyArgs} args - Arguments to create many Verifications.
+     * @example
+     * // Create many Verifications
+     * const verification = await prisma.verification.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VerificationCreateManyArgs>(args?: SelectSubset<T, VerificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Verifications and returns the data saved in the database.
+     * @param {VerificationCreateManyAndReturnArgs} args - Arguments to create many Verifications.
+     * @example
+     * // Create many Verifications
+     * const verification = await prisma.verification.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Verifications and only return the `id`
+     * const verificationWithIdOnly = await prisma.verification.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VerificationCreateManyAndReturnArgs>(args?: SelectSubset<T, VerificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Verification.
+     * @param {VerificationDeleteArgs} args - Arguments to delete one Verification.
+     * @example
+     * // Delete one Verification
+     * const Verification = await prisma.verification.delete({
+     *   where: {
+     *     // ... filter to delete one Verification
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VerificationDeleteArgs>(args: SelectSubset<T, VerificationDeleteArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Verification.
+     * @param {VerificationUpdateArgs} args - Arguments to update one Verification.
+     * @example
+     * // Update one Verification
+     * const verification = await prisma.verification.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VerificationUpdateArgs>(args: SelectSubset<T, VerificationUpdateArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Verifications.
+     * @param {VerificationDeleteManyArgs} args - Arguments to filter Verifications to delete.
+     * @example
+     * // Delete a few Verifications
+     * const { count } = await prisma.verification.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VerificationDeleteManyArgs>(args?: SelectSubset<T, VerificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Verifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Verifications
+     * const verification = await prisma.verification.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VerificationUpdateManyArgs>(args: SelectSubset<T, VerificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Verifications and returns the data updated in the database.
+     * @param {VerificationUpdateManyAndReturnArgs} args - Arguments to update many Verifications.
+     * @example
+     * // Update many Verifications
+     * const verification = await prisma.verification.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Verifications and only return the `id`
+     * const verificationWithIdOnly = await prisma.verification.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VerificationUpdateManyAndReturnArgs>(args: SelectSubset<T, VerificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Verification.
+     * @param {VerificationUpsertArgs} args - Arguments to update or create a Verification.
+     * @example
+     * // Update or create a Verification
+     * const verification = await prisma.verification.upsert({
+     *   create: {
+     *     // ... data to create a Verification
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Verification we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VerificationUpsertArgs>(args: SelectSubset<T, VerificationUpsertArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Verifications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCountArgs} args - Arguments to filter Verifications to count.
+     * @example
+     * // Count the number of Verifications
+     * const count = await prisma.verification.count({
+     *   where: {
+     *     // ... the filter for the Verifications we want to count
+     *   }
+     * })
+    **/
+    count<T extends VerificationCountArgs>(
+      args?: Subset<T, VerificationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VerificationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Verification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VerificationAggregateArgs>(args: Subset<T, VerificationAggregateArgs>): Prisma.PrismaPromise<GetVerificationAggregateType<T>>
+
+    /**
+     * Group by Verification.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VerificationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VerificationGroupByArgs['orderBy'] }
+        : { orderBy?: VerificationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VerificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Verification model
+   */
+  readonly fields: VerificationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Verification.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VerificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Verification model
+   */
+  interface VerificationFieldRefs {
+    readonly id: FieldRef<"Verification", 'String'>
+    readonly userId: FieldRef<"Verification", 'String'>
+    readonly documents: FieldRef<"Verification", 'Json'>
+    readonly status: FieldRef<"Verification", 'String'>
+    readonly notes: FieldRef<"Verification", 'String'>
+    readonly submittedAt: FieldRef<"Verification", 'DateTime'>
+    readonly reviewedAt: FieldRef<"Verification", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Verification findUnique
+   */
+  export type VerificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Verification to fetch.
+     */
+    where: VerificationWhereUniqueInput
+  }
+
+  /**
+   * Verification findUniqueOrThrow
+   */
+  export type VerificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Verification to fetch.
+     */
+    where: VerificationWhereUniqueInput
+  }
+
+  /**
+   * Verification findFirst
+   */
+  export type VerificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Verification to fetch.
+     */
+    where?: VerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Verifications to fetch.
+     */
+    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Verifications.
+     */
+    cursor?: VerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Verifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Verifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Verifications.
+     */
+    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
+  }
+
+  /**
+   * Verification findFirstOrThrow
+   */
+  export type VerificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Verification to fetch.
+     */
+    where?: VerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Verifications to fetch.
+     */
+    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Verifications.
+     */
+    cursor?: VerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Verifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Verifications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Verifications.
+     */
+    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
+  }
+
+  /**
+   * Verification findMany
+   */
+  export type VerificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * Filter, which Verifications to fetch.
+     */
+    where?: VerificationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Verifications to fetch.
+     */
+    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Verifications.
+     */
+    cursor?: VerificationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Verifications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Verifications.
+     */
+    skip?: number
+    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
+  }
+
+  /**
+   * Verification create
+   */
+  export type VerificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Verification.
+     */
+    data: XOR<VerificationCreateInput, VerificationUncheckedCreateInput>
+  }
+
+  /**
+   * Verification createMany
+   */
+  export type VerificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Verifications.
+     */
+    data: VerificationCreateManyInput | VerificationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Verification createManyAndReturn
+   */
+  export type VerificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Verifications.
+     */
+    data: VerificationCreateManyInput | VerificationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Verification update
+   */
+  export type VerificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Verification.
+     */
+    data: XOR<VerificationUpdateInput, VerificationUncheckedUpdateInput>
+    /**
+     * Choose, which Verification to update.
+     */
+    where: VerificationWhereUniqueInput
+  }
+
+  /**
+   * Verification updateMany
+   */
+  export type VerificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Verifications.
+     */
+    data: XOR<VerificationUpdateManyMutationInput, VerificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Verifications to update
+     */
+    where?: VerificationWhereInput
+    /**
+     * Limit how many Verifications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Verification updateManyAndReturn
+   */
+  export type VerificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * The data used to update Verifications.
+     */
+    data: XOR<VerificationUpdateManyMutationInput, VerificationUncheckedUpdateManyInput>
+    /**
+     * Filter which Verifications to update
+     */
+    where?: VerificationWhereInput
+    /**
+     * Limit how many Verifications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Verification upsert
+   */
+  export type VerificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Verification to update in case it exists.
+     */
+    where: VerificationWhereUniqueInput
+    /**
+     * In case the Verification found by the `where` argument doesn't exist, create a new Verification with this data.
+     */
+    create: XOR<VerificationCreateInput, VerificationUncheckedCreateInput>
+    /**
+     * In case the Verification was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VerificationUpdateInput, VerificationUncheckedUpdateInput>
+  }
+
+  /**
+   * Verification delete
+   */
+  export type VerificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
+    /**
+     * Filter which Verification to delete.
+     */
+    where: VerificationWhereUniqueInput
+  }
+
+  /**
+   * Verification deleteMany
+   */
+  export type VerificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Verifications to delete
+     */
+    where?: VerificationWhereInput
+    /**
+     * Limit how many Verifications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Verification without action
+   */
+  export type VerificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Verification
+     */
+    select?: VerificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Verification
+     */
+    omit?: VerificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationInclude<ExtArgs> | null
   }
 
 
@@ -3880,7 +4900,6 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     Match?: boolean | Investor$MatchArgs<ExtArgs>
-    Verification?: boolean | Investor$VerificationArgs<ExtArgs>
     _count?: boolean | InvestorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["investor"]>
 
@@ -3923,7 +4942,6 @@ export namespace Prisma {
   export type InvestorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     Match?: boolean | Investor$MatchArgs<ExtArgs>
-    Verification?: boolean | Investor$VerificationArgs<ExtArgs>
     _count?: boolean | InvestorCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InvestorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3938,7 +4956,6 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       Match: Prisma.$MatchPayload<ExtArgs>[]
-      Verification: Prisma.$VerificationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4345,7 +5362,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Match<T extends Investor$MatchArgs<ExtArgs> = {}>(args?: Subset<T, Investor$MatchArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Verification<T extends Investor$VerificationArgs<ExtArgs> = {}>(args?: Subset<T, Investor$VerificationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4800,30 +5816,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MatchScalarFieldEnum | MatchScalarFieldEnum[]
-  }
-
-  /**
-   * Investor.Verification
-   */
-  export type Investor$VerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    where?: VerificationWhereInput
-    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
-    cursor?: VerificationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
   }
 
   /**
@@ -5972,1126 +6964,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Verification
-   */
-
-  export type AggregateVerification = {
-    _count: VerificationCountAggregateOutputType | null
-    _min: VerificationMinAggregateOutputType | null
-    _max: VerificationMaxAggregateOutputType | null
-  }
-
-  export type VerificationMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    status: $Enums.Status | null
-    submittedAt: Date | null
-    reviewedAt: Date | null
-    adminNotes: string | null
-    investorId: string | null
-  }
-
-  export type VerificationMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    status: $Enums.Status | null
-    submittedAt: Date | null
-    reviewedAt: Date | null
-    adminNotes: string | null
-    investorId: string | null
-  }
-
-  export type VerificationCountAggregateOutputType = {
-    id: number
-    userId: number
-    documents: number
-    status: number
-    submittedAt: number
-    reviewedAt: number
-    adminNotes: number
-    investorId: number
-    _all: number
-  }
-
-
-  export type VerificationMinAggregateInputType = {
-    id?: true
-    userId?: true
-    status?: true
-    submittedAt?: true
-    reviewedAt?: true
-    adminNotes?: true
-    investorId?: true
-  }
-
-  export type VerificationMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    status?: true
-    submittedAt?: true
-    reviewedAt?: true
-    adminNotes?: true
-    investorId?: true
-  }
-
-  export type VerificationCountAggregateInputType = {
-    id?: true
-    userId?: true
-    documents?: true
-    status?: true
-    submittedAt?: true
-    reviewedAt?: true
-    adminNotes?: true
-    investorId?: true
-    _all?: true
-  }
-
-  export type VerificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Verification to aggregate.
-     */
-    where?: VerificationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Verifications to fetch.
-     */
-    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VerificationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Verifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Verifications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Verifications
-    **/
-    _count?: true | VerificationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VerificationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VerificationMaxAggregateInputType
-  }
-
-  export type GetVerificationAggregateType<T extends VerificationAggregateArgs> = {
-        [P in keyof T & keyof AggregateVerification]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVerification[P]>
-      : GetScalarType<T[P], AggregateVerification[P]>
-  }
-
-
-
-
-  export type VerificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VerificationWhereInput
-    orderBy?: VerificationOrderByWithAggregationInput | VerificationOrderByWithAggregationInput[]
-    by: VerificationScalarFieldEnum[] | VerificationScalarFieldEnum
-    having?: VerificationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VerificationCountAggregateInputType | true
-    _min?: VerificationMinAggregateInputType
-    _max?: VerificationMaxAggregateInputType
-  }
-
-  export type VerificationGroupByOutputType = {
-    id: string
-    userId: string
-    documents: string[]
-    status: $Enums.Status
-    submittedAt: Date
-    reviewedAt: Date | null
-    adminNotes: string | null
-    investorId: string | null
-    _count: VerificationCountAggregateOutputType | null
-    _min: VerificationMinAggregateOutputType | null
-    _max: VerificationMaxAggregateOutputType | null
-  }
-
-  type GetVerificationGroupByPayload<T extends VerificationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VerificationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VerificationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VerificationGroupByOutputType[P]>
-            : GetScalarType<T[P], VerificationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    documents?: boolean
-    status?: boolean
-    submittedAt?: boolean
-    reviewedAt?: boolean
-    adminNotes?: boolean
-    investorId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    Investor?: boolean | Verification$InvestorArgs<ExtArgs>
-  }, ExtArgs["result"]["verification"]>
-
-  export type VerificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    documents?: boolean
-    status?: boolean
-    submittedAt?: boolean
-    reviewedAt?: boolean
-    adminNotes?: boolean
-    investorId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    Investor?: boolean | Verification$InvestorArgs<ExtArgs>
-  }, ExtArgs["result"]["verification"]>
-
-  export type VerificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    documents?: boolean
-    status?: boolean
-    submittedAt?: boolean
-    reviewedAt?: boolean
-    adminNotes?: boolean
-    investorId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    Investor?: boolean | Verification$InvestorArgs<ExtArgs>
-  }, ExtArgs["result"]["verification"]>
-
-  export type VerificationSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    documents?: boolean
-    status?: boolean
-    submittedAt?: boolean
-    reviewedAt?: boolean
-    adminNotes?: boolean
-    investorId?: boolean
-  }
-
-  export type VerificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "documents" | "status" | "submittedAt" | "reviewedAt" | "adminNotes" | "investorId", ExtArgs["result"]["verification"]>
-  export type VerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    Investor?: boolean | Verification$InvestorArgs<ExtArgs>
-  }
-  export type VerificationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    Investor?: boolean | Verification$InvestorArgs<ExtArgs>
-  }
-  export type VerificationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    Investor?: boolean | Verification$InvestorArgs<ExtArgs>
-  }
-
-  export type $VerificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Verification"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      Investor: Prisma.$InvestorPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      documents: string[]
-      status: $Enums.Status
-      submittedAt: Date
-      reviewedAt: Date | null
-      adminNotes: string | null
-      investorId: string | null
-    }, ExtArgs["result"]["verification"]>
-    composites: {}
-  }
-
-  type VerificationGetPayload<S extends boolean | null | undefined | VerificationDefaultArgs> = $Result.GetResult<Prisma.$VerificationPayload, S>
-
-  type VerificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VerificationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: VerificationCountAggregateInputType | true
-    }
-
-  export interface VerificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Verification'], meta: { name: 'Verification' } }
-    /**
-     * Find zero or one Verification that matches the filter.
-     * @param {VerificationFindUniqueArgs} args - Arguments to find a Verification
-     * @example
-     * // Get one Verification
-     * const verification = await prisma.verification.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends VerificationFindUniqueArgs>(args: SelectSubset<T, VerificationFindUniqueArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Verification that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {VerificationFindUniqueOrThrowArgs} args - Arguments to find a Verification
-     * @example
-     * // Get one Verification
-     * const verification = await prisma.verification.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends VerificationFindUniqueOrThrowArgs>(args: SelectSubset<T, VerificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Verification that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationFindFirstArgs} args - Arguments to find a Verification
-     * @example
-     * // Get one Verification
-     * const verification = await prisma.verification.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends VerificationFindFirstArgs>(args?: SelectSubset<T, VerificationFindFirstArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Verification that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationFindFirstOrThrowArgs} args - Arguments to find a Verification
-     * @example
-     * // Get one Verification
-     * const verification = await prisma.verification.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends VerificationFindFirstOrThrowArgs>(args?: SelectSubset<T, VerificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Verifications that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Verifications
-     * const verifications = await prisma.verification.findMany()
-     * 
-     * // Get first 10 Verifications
-     * const verifications = await prisma.verification.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const verificationWithIdOnly = await prisma.verification.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends VerificationFindManyArgs>(args?: SelectSubset<T, VerificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Verification.
-     * @param {VerificationCreateArgs} args - Arguments to create a Verification.
-     * @example
-     * // Create one Verification
-     * const Verification = await prisma.verification.create({
-     *   data: {
-     *     // ... data to create a Verification
-     *   }
-     * })
-     * 
-     */
-    create<T extends VerificationCreateArgs>(args: SelectSubset<T, VerificationCreateArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Verifications.
-     * @param {VerificationCreateManyArgs} args - Arguments to create many Verifications.
-     * @example
-     * // Create many Verifications
-     * const verification = await prisma.verification.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends VerificationCreateManyArgs>(args?: SelectSubset<T, VerificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Verifications and returns the data saved in the database.
-     * @param {VerificationCreateManyAndReturnArgs} args - Arguments to create many Verifications.
-     * @example
-     * // Create many Verifications
-     * const verification = await prisma.verification.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Verifications and only return the `id`
-     * const verificationWithIdOnly = await prisma.verification.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends VerificationCreateManyAndReturnArgs>(args?: SelectSubset<T, VerificationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Verification.
-     * @param {VerificationDeleteArgs} args - Arguments to delete one Verification.
-     * @example
-     * // Delete one Verification
-     * const Verification = await prisma.verification.delete({
-     *   where: {
-     *     // ... filter to delete one Verification
-     *   }
-     * })
-     * 
-     */
-    delete<T extends VerificationDeleteArgs>(args: SelectSubset<T, VerificationDeleteArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Verification.
-     * @param {VerificationUpdateArgs} args - Arguments to update one Verification.
-     * @example
-     * // Update one Verification
-     * const verification = await prisma.verification.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends VerificationUpdateArgs>(args: SelectSubset<T, VerificationUpdateArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Verifications.
-     * @param {VerificationDeleteManyArgs} args - Arguments to filter Verifications to delete.
-     * @example
-     * // Delete a few Verifications
-     * const { count } = await prisma.verification.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends VerificationDeleteManyArgs>(args?: SelectSubset<T, VerificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Verifications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Verifications
-     * const verification = await prisma.verification.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends VerificationUpdateManyArgs>(args: SelectSubset<T, VerificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Verifications and returns the data updated in the database.
-     * @param {VerificationUpdateManyAndReturnArgs} args - Arguments to update many Verifications.
-     * @example
-     * // Update many Verifications
-     * const verification = await prisma.verification.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Verifications and only return the `id`
-     * const verificationWithIdOnly = await prisma.verification.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends VerificationUpdateManyAndReturnArgs>(args: SelectSubset<T, VerificationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Verification.
-     * @param {VerificationUpsertArgs} args - Arguments to update or create a Verification.
-     * @example
-     * // Update or create a Verification
-     * const verification = await prisma.verification.upsert({
-     *   create: {
-     *     // ... data to create a Verification
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Verification we want to update
-     *   }
-     * })
-     */
-    upsert<T extends VerificationUpsertArgs>(args: SelectSubset<T, VerificationUpsertArgs<ExtArgs>>): Prisma__VerificationClient<$Result.GetResult<Prisma.$VerificationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Verifications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationCountArgs} args - Arguments to filter Verifications to count.
-     * @example
-     * // Count the number of Verifications
-     * const count = await prisma.verification.count({
-     *   where: {
-     *     // ... the filter for the Verifications we want to count
-     *   }
-     * })
-    **/
-    count<T extends VerificationCountArgs>(
-      args?: Subset<T, VerificationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VerificationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Verification.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VerificationAggregateArgs>(args: Subset<T, VerificationAggregateArgs>): Prisma.PrismaPromise<GetVerificationAggregateType<T>>
-
-    /**
-     * Group by Verification.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VerificationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VerificationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VerificationGroupByArgs['orderBy'] }
-        : { orderBy?: VerificationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VerificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Verification model
-   */
-  readonly fields: VerificationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Verification.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VerificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Investor<T extends Verification$InvestorArgs<ExtArgs> = {}>(args?: Subset<T, Verification$InvestorArgs<ExtArgs>>): Prisma__InvestorClient<$Result.GetResult<Prisma.$InvestorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Verification model
-   */
-  interface VerificationFieldRefs {
-    readonly id: FieldRef<"Verification", 'String'>
-    readonly userId: FieldRef<"Verification", 'String'>
-    readonly documents: FieldRef<"Verification", 'String[]'>
-    readonly status: FieldRef<"Verification", 'Status'>
-    readonly submittedAt: FieldRef<"Verification", 'DateTime'>
-    readonly reviewedAt: FieldRef<"Verification", 'DateTime'>
-    readonly adminNotes: FieldRef<"Verification", 'String'>
-    readonly investorId: FieldRef<"Verification", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Verification findUnique
-   */
-  export type VerificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * Filter, which Verification to fetch.
-     */
-    where: VerificationWhereUniqueInput
-  }
-
-  /**
-   * Verification findUniqueOrThrow
-   */
-  export type VerificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * Filter, which Verification to fetch.
-     */
-    where: VerificationWhereUniqueInput
-  }
-
-  /**
-   * Verification findFirst
-   */
-  export type VerificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * Filter, which Verification to fetch.
-     */
-    where?: VerificationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Verifications to fetch.
-     */
-    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Verifications.
-     */
-    cursor?: VerificationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Verifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Verifications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Verifications.
-     */
-    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
-  }
-
-  /**
-   * Verification findFirstOrThrow
-   */
-  export type VerificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * Filter, which Verification to fetch.
-     */
-    where?: VerificationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Verifications to fetch.
-     */
-    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Verifications.
-     */
-    cursor?: VerificationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Verifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Verifications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Verifications.
-     */
-    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
-  }
-
-  /**
-   * Verification findMany
-   */
-  export type VerificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * Filter, which Verifications to fetch.
-     */
-    where?: VerificationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Verifications to fetch.
-     */
-    orderBy?: VerificationOrderByWithRelationInput | VerificationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Verifications.
-     */
-    cursor?: VerificationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Verifications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Verifications.
-     */
-    skip?: number
-    distinct?: VerificationScalarFieldEnum | VerificationScalarFieldEnum[]
-  }
-
-  /**
-   * Verification create
-   */
-  export type VerificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Verification.
-     */
-    data: XOR<VerificationCreateInput, VerificationUncheckedCreateInput>
-  }
-
-  /**
-   * Verification createMany
-   */
-  export type VerificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Verifications.
-     */
-    data: VerificationCreateManyInput | VerificationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Verification createManyAndReturn
-   */
-  export type VerificationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * The data used to create many Verifications.
-     */
-    data: VerificationCreateManyInput | VerificationCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Verification update
-   */
-  export type VerificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Verification.
-     */
-    data: XOR<VerificationUpdateInput, VerificationUncheckedUpdateInput>
-    /**
-     * Choose, which Verification to update.
-     */
-    where: VerificationWhereUniqueInput
-  }
-
-  /**
-   * Verification updateMany
-   */
-  export type VerificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Verifications.
-     */
-    data: XOR<VerificationUpdateManyMutationInput, VerificationUncheckedUpdateManyInput>
-    /**
-     * Filter which Verifications to update
-     */
-    where?: VerificationWhereInput
-    /**
-     * Limit how many Verifications to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Verification updateManyAndReturn
-   */
-  export type VerificationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * The data used to update Verifications.
-     */
-    data: XOR<VerificationUpdateManyMutationInput, VerificationUncheckedUpdateManyInput>
-    /**
-     * Filter which Verifications to update
-     */
-    where?: VerificationWhereInput
-    /**
-     * Limit how many Verifications to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Verification upsert
-   */
-  export type VerificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Verification to update in case it exists.
-     */
-    where: VerificationWhereUniqueInput
-    /**
-     * In case the Verification found by the `where` argument doesn't exist, create a new Verification with this data.
-     */
-    create: XOR<VerificationCreateInput, VerificationUncheckedCreateInput>
-    /**
-     * In case the Verification was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VerificationUpdateInput, VerificationUncheckedUpdateInput>
-  }
-
-  /**
-   * Verification delete
-   */
-  export type VerificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-    /**
-     * Filter which Verification to delete.
-     */
-    where: VerificationWhereUniqueInput
-  }
-
-  /**
-   * Verification deleteMany
-   */
-  export type VerificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Verifications to delete
-     */
-    where?: VerificationWhereInput
-    /**
-     * Limit how many Verifications to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Verification.Investor
-   */
-  export type Verification$InvestorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Investor
-     */
-    select?: InvestorSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Investor
-     */
-    omit?: InvestorOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: InvestorInclude<ExtArgs> | null
-    where?: InvestorWhereInput
-  }
-
-  /**
-   * Verification without action
-   */
-  export type VerificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Verification
-     */
-    select?: VerificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Verification
-     */
-    omit?: VerificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VerificationInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -7109,13 +6981,26 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     email: 'email',
-    emailVerified: 'emailVerified',
     role: 'role',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    verificationStatus: 'verificationStatus',
+    password: 'password',
+    createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const VerificationScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    documents: 'documents',
+    status: 'status',
+    notes: 'notes',
+    submittedAt: 'submittedAt',
+    reviewedAt: 'reviewedAt'
+  };
+
+  export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
   export const StartupScalarFieldEnum: {
@@ -7161,20 +7046,6 @@ export namespace Prisma {
   export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
 
 
-  export const VerificationScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    documents: 'documents',
-    status: 'status',
-    submittedAt: 'submittedAt',
-    reviewedAt: 'reviewedAt',
-    adminNotes: 'adminNotes',
-    investorId: 'investorId'
-  };
-
-  export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
-
-
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -7183,12 +7054,28 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   export const NullsOrder: {
@@ -7215,13 +7102,6 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -7254,6 +7134,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -7264,20 +7158,6 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Status'
-   */
-  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
-    
-
-
-  /**
-   * Reference to a field of type 'Status[]'
-   */
-  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
     
 
 
@@ -7305,26 +7185,26 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
-    emailVerified?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    verificationStatus?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+    verification?: XOR<VerificationNullableScalarRelationFilter, VerificationWhereInput> | null
     startup?: XOR<StartupNullableScalarRelationFilter, StartupWhereInput> | null
     investor?: XOR<InvestorNullableScalarRelationFilter, InvestorWhereInput> | null
-    Verification?: VerificationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    emailVerified?: SortOrder
     role?: SortOrder
+    verificationStatus?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
+    verification?: VerificationOrderByWithRelationInput
     startup?: StartupOrderByWithRelationInput
     investor?: InvestorOrderByWithRelationInput
-    Verification?: VerificationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -7334,23 +7214,23 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
-    emailVerified?: BoolFilter<"User"> | boolean
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
+    verificationStatus?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
+    verification?: XOR<VerificationNullableScalarRelationFilter, VerificationWhereInput> | null
     startup?: XOR<StartupNullableScalarRelationFilter, StartupWhereInput> | null
     investor?: XOR<InvestorNullableScalarRelationFilter, InvestorWhereInput> | null
-    Verification?: VerificationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    emailVerified?: SortOrder
     role?: SortOrder
+    verificationStatus?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -7363,10 +7243,75 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
-    emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
+    verificationStatus?: StringWithAggregatesFilter<"User"> | string
+    password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type VerificationWhereInput = {
+    AND?: VerificationWhereInput | VerificationWhereInput[]
+    OR?: VerificationWhereInput[]
+    NOT?: VerificationWhereInput | VerificationWhereInput[]
+    id?: StringFilter<"Verification"> | string
+    userId?: StringFilter<"Verification"> | string
+    documents?: JsonFilter<"Verification">
+    status?: StringFilter<"Verification"> | string
+    notes?: StringNullableFilter<"Verification"> | string | null
+    submittedAt?: DateTimeFilter<"Verification"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"Verification"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type VerificationOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    documents?: SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type VerificationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: VerificationWhereInput | VerificationWhereInput[]
+    OR?: VerificationWhereInput[]
+    NOT?: VerificationWhereInput | VerificationWhereInput[]
+    documents?: JsonFilter<"Verification">
+    status?: StringFilter<"Verification"> | string
+    notes?: StringNullableFilter<"Verification"> | string | null
+    submittedAt?: DateTimeFilter<"Verification"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"Verification"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type VerificationOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    documents?: SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    _count?: VerificationCountOrderByAggregateInput
+    _max?: VerificationMaxOrderByAggregateInput
+    _min?: VerificationMinOrderByAggregateInput
+  }
+
+  export type VerificationScalarWhereWithAggregatesInput = {
+    AND?: VerificationScalarWhereWithAggregatesInput | VerificationScalarWhereWithAggregatesInput[]
+    OR?: VerificationScalarWhereWithAggregatesInput[]
+    NOT?: VerificationScalarWhereWithAggregatesInput | VerificationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Verification"> | string
+    userId?: StringWithAggregatesFilter<"Verification"> | string
+    documents?: JsonWithAggregatesFilter<"Verification">
+    status?: StringWithAggregatesFilter<"Verification"> | string
+    notes?: StringNullableWithAggregatesFilter<"Verification"> | string | null
+    submittedAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
   }
 
   export type StartupWhereInput = {
@@ -7468,7 +7413,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Investor"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Match?: MatchListRelationFilter
-    Verification?: VerificationListRelationFilter
   }
 
   export type InvestorOrderByWithRelationInput = {
@@ -7482,7 +7426,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     Match?: MatchOrderByRelationAggregateInput
-    Verification?: VerificationOrderByRelationAggregateInput
   }
 
   export type InvestorWhereUniqueInput = Prisma.AtLeast<{
@@ -7499,7 +7442,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Investor"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Match?: MatchListRelationFilter
-    Verification?: VerificationListRelationFilter
   }, "id" | "userId">
 
   export type InvestorOrderByWithAggregationInput = {
@@ -7601,159 +7543,155 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Match"> | Date | string
   }
 
-  export type VerificationWhereInput = {
-    AND?: VerificationWhereInput | VerificationWhereInput[]
-    OR?: VerificationWhereInput[]
-    NOT?: VerificationWhereInput | VerificationWhereInput[]
-    id?: StringFilter<"Verification"> | string
-    userId?: StringFilter<"Verification"> | string
-    documents?: StringNullableListFilter<"Verification">
-    status?: EnumStatusFilter<"Verification"> | $Enums.Status
-    submittedAt?: DateTimeFilter<"Verification"> | Date | string
-    reviewedAt?: DateTimeNullableFilter<"Verification"> | Date | string | null
-    adminNotes?: StringNullableFilter<"Verification"> | string | null
-    investorId?: StringNullableFilter<"Verification"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Investor?: XOR<InvestorNullableScalarRelationFilter, InvestorWhereInput> | null
-  }
-
-  export type VerificationOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    documents?: SortOrder
-    status?: SortOrder
-    submittedAt?: SortOrder
-    reviewedAt?: SortOrderInput | SortOrder
-    adminNotes?: SortOrderInput | SortOrder
-    investorId?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
-    Investor?: InvestorOrderByWithRelationInput
-  }
-
-  export type VerificationWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: VerificationWhereInput | VerificationWhereInput[]
-    OR?: VerificationWhereInput[]
-    NOT?: VerificationWhereInput | VerificationWhereInput[]
-    userId?: StringFilter<"Verification"> | string
-    documents?: StringNullableListFilter<"Verification">
-    status?: EnumStatusFilter<"Verification"> | $Enums.Status
-    submittedAt?: DateTimeFilter<"Verification"> | Date | string
-    reviewedAt?: DateTimeNullableFilter<"Verification"> | Date | string | null
-    adminNotes?: StringNullableFilter<"Verification"> | string | null
-    investorId?: StringNullableFilter<"Verification"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Investor?: XOR<InvestorNullableScalarRelationFilter, InvestorWhereInput> | null
-  }, "id">
-
-  export type VerificationOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    documents?: SortOrder
-    status?: SortOrder
-    submittedAt?: SortOrder
-    reviewedAt?: SortOrderInput | SortOrder
-    adminNotes?: SortOrderInput | SortOrder
-    investorId?: SortOrderInput | SortOrder
-    _count?: VerificationCountOrderByAggregateInput
-    _max?: VerificationMaxOrderByAggregateInput
-    _min?: VerificationMinOrderByAggregateInput
-  }
-
-  export type VerificationScalarWhereWithAggregatesInput = {
-    AND?: VerificationScalarWhereWithAggregatesInput | VerificationScalarWhereWithAggregatesInput[]
-    OR?: VerificationScalarWhereWithAggregatesInput[]
-    NOT?: VerificationScalarWhereWithAggregatesInput | VerificationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Verification"> | string
-    userId?: StringWithAggregatesFilter<"Verification"> | string
-    documents?: StringNullableListFilter<"Verification">
-    status?: EnumStatusWithAggregatesFilter<"Verification"> | $Enums.Status
-    submittedAt?: DateTimeWithAggregatesFilter<"Verification"> | Date | string
-    reviewedAt?: DateTimeNullableWithAggregatesFilter<"Verification"> | Date | string | null
-    adminNotes?: StringNullableWithAggregatesFilter<"Verification"> | string | null
-    investorId?: StringNullableWithAggregatesFilter<"Verification"> | string | null
-  }
-
   export type UserCreateInput = {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
+    verification?: VerificationCreateNestedOneWithoutUserInput
     startup?: StartupCreateNestedOneWithoutUserInput
     investor?: InvestorCreateNestedOneWithoutUserInput
-    Verification?: VerificationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
+    verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
     startup?: StartupUncheckedCreateNestedOneWithoutUserInput
     investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
-    Verification?: VerificationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUpdateOneWithoutUserNestedInput
     startup?: StartupUpdateOneWithoutUserNestedInput
     investor?: InvestorUpdateOneWithoutUserNestedInput
-    Verification?: VerificationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
     startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
     investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
-    Verification?: VerificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VerificationCreateInput = {
+    id?: string
+    documents: JsonNullValueInput | InputJsonValue
+    status?: string
+    notes?: string | null
+    submittedAt?: Date | string
+    reviewedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutVerificationInput
+  }
+
+  export type VerificationUncheckedCreateInput = {
+    id?: string
+    userId: string
+    documents: JsonNullValueInput | InputJsonValue
+    status?: string
+    notes?: string | null
+    submittedAt?: Date | string
+    reviewedAt?: Date | string | null
+  }
+
+  export type VerificationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documents?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutVerificationNestedInput
+  }
+
+  export type VerificationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    documents?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationCreateManyInput = {
+    id?: string
+    userId: string
+    documents: JsonNullValueInput | InputJsonValue
+    status?: string
+    notes?: string | null
+    submittedAt?: Date | string
+    reviewedAt?: Date | string | null
+  }
+
+  export type VerificationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documents?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    documents?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StartupCreateInput = {
@@ -7860,7 +7798,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInvestorInput
     Match?: MatchCreateNestedManyWithoutInvestorInput
-    Verification?: VerificationCreateNestedManyWithoutInvestorInput
   }
 
   export type InvestorUncheckedCreateInput = {
@@ -7873,7 +7810,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Match?: MatchUncheckedCreateNestedManyWithoutInvestorInput
-    Verification?: VerificationUncheckedCreateNestedManyWithoutInvestorInput
   }
 
   export type InvestorUpdateInput = {
@@ -7886,7 +7822,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInvestorNestedInput
     Match?: MatchUpdateManyWithoutInvestorNestedInput
-    Verification?: VerificationUpdateManyWithoutInvestorNestedInput
   }
 
   export type InvestorUncheckedUpdateInput = {
@@ -7899,7 +7834,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Match?: MatchUncheckedUpdateManyWithoutInvestorNestedInput
-    Verification?: VerificationUncheckedUpdateManyWithoutInvestorNestedInput
   }
 
   export type InvestorCreateManyInput = {
@@ -8002,81 +7936,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VerificationCreateInput = {
-    id?: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    user: UserCreateNestedOneWithoutVerificationInput
-    Investor?: InvestorCreateNestedOneWithoutVerificationInput
-  }
-
-  export type VerificationUncheckedCreateInput = {
-    id?: string
-    userId: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    investorId?: string | null
-  }
-
-  export type VerificationUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutVerificationNestedInput
-    Investor?: InvestorUpdateOneWithoutVerificationNestedInput
-  }
-
-  export type VerificationUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    investorId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type VerificationCreateManyInput = {
-    id?: string
-    userId: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    investorId?: string | null
-  }
-
-  export type VerificationUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type VerificationUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    investorId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8090,11 +7949,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type EnumUserRoleFilter<$PrismaModel = never> = {
@@ -8115,6 +7969,11 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type VerificationNullableScalarRelationFilter = {
+    is?: VerificationWhereInput | null
+    isNot?: VerificationWhereInput | null
+  }
+
   export type StartupNullableScalarRelationFilter = {
     is?: StartupWhereInput | null
     isNot?: StartupWhereInput | null
@@ -8125,44 +7984,34 @@ export namespace Prisma {
     isNot?: InvestorWhereInput | null
   }
 
-  export type VerificationListRelationFilter = {
-    every?: VerificationWhereInput
-    some?: VerificationWhereInput
-    none?: VerificationWhereInput
-  }
-
-  export type VerificationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    emailVerified?: SortOrder
     role?: SortOrder
+    verificationStatus?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    emailVerified?: SortOrder
     role?: SortOrder
+    verificationStatus?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    emailVerified?: SortOrder
     role?: SortOrder
+    verificationStatus?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -8181,14 +8030,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
@@ -8214,6 +8055,29 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
@@ -8230,6 +8094,113 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type VerificationCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    documents?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+  }
+
+  export type VerificationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+  }
+
+  export type VerificationMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    submittedAt?: SortOrder
+    reviewedAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -8241,20 +8212,10 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type MatchListRelationFilter = {
     every?: MatchWhereInput
     some?: MatchWhereInput
     none?: MatchWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type MatchOrderByRelationAggregateInput = {
@@ -8306,24 +8267,6 @@ export namespace Prisma {
 
   export type StartupSumOrderByAggregateInput = {
     fundingGoal?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -8434,77 +8377,10 @@ export namespace Prisma {
     matchScore?: SortOrder
   }
 
-  export type EnumStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type VerificationCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    documents?: SortOrder
-    status?: SortOrder
-    submittedAt?: SortOrder
-    reviewedAt?: SortOrder
-    adminNotes?: SortOrder
-    investorId?: SortOrder
-  }
-
-  export type VerificationMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    status?: SortOrder
-    submittedAt?: SortOrder
-    reviewedAt?: SortOrder
-    adminNotes?: SortOrder
-    investorId?: SortOrder
-  }
-
-  export type VerificationMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    status?: SortOrder
-    submittedAt?: SortOrder
-    reviewedAt?: SortOrder
-    adminNotes?: SortOrder
-    investorId?: SortOrder
-  }
-
-  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusFilter<$PrismaModel>
-    _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  export type VerificationCreateNestedOneWithoutUserInput = {
+    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
+    connect?: VerificationWhereUniqueInput
   }
 
   export type StartupCreateNestedOneWithoutUserInput = {
@@ -8519,11 +8395,10 @@ export namespace Prisma {
     connect?: InvestorWhereUniqueInput
   }
 
-  export type VerificationCreateNestedManyWithoutUserInput = {
-    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput> | VerificationCreateWithoutUserInput[] | VerificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput | VerificationCreateOrConnectWithoutUserInput[]
-    createMany?: VerificationCreateManyUserInputEnvelope
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
+  export type VerificationUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
+    connect?: VerificationWhereUniqueInput
   }
 
   export type StartupUncheckedCreateNestedOneWithoutUserInput = {
@@ -8538,19 +8413,8 @@ export namespace Prisma {
     connect?: InvestorWhereUniqueInput
   }
 
-  export type VerificationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput> | VerificationCreateWithoutUserInput[] | VerificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput | VerificationCreateOrConnectWithoutUserInput[]
-    createMany?: VerificationCreateManyUserInputEnvelope
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -8559,6 +8423,16 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type VerificationUpdateOneWithoutUserNestedInput = {
+    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
+    upsert?: VerificationUpsertWithoutUserInput
+    disconnect?: VerificationWhereInput | boolean
+    delete?: VerificationWhereInput | boolean
+    connect?: VerificationWhereUniqueInput
+    update?: XOR<XOR<VerificationUpdateToOneWithWhereWithoutUserInput, VerificationUpdateWithoutUserInput>, VerificationUncheckedUpdateWithoutUserInput>
   }
 
   export type StartupUpdateOneWithoutUserNestedInput = {
@@ -8581,18 +8455,14 @@ export namespace Prisma {
     update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutUserInput, InvestorUpdateWithoutUserInput>, InvestorUncheckedUpdateWithoutUserInput>
   }
 
-  export type VerificationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput> | VerificationCreateWithoutUserInput[] | VerificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput | VerificationCreateOrConnectWithoutUserInput[]
-    upsert?: VerificationUpsertWithWhereUniqueWithoutUserInput | VerificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VerificationCreateManyUserInputEnvelope
-    set?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    disconnect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    delete?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    update?: VerificationUpdateWithWhereUniqueWithoutUserInput | VerificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VerificationUpdateManyWithWhereWithoutUserInput | VerificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
+  export type VerificationUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput
+    upsert?: VerificationUpsertWithoutUserInput
+    disconnect?: VerificationWhereInput | boolean
+    delete?: VerificationWhereInput | boolean
+    connect?: VerificationWhereUniqueInput
+    update?: XOR<XOR<VerificationUpdateToOneWithWhereWithoutUserInput, VerificationUpdateWithoutUserInput>, VerificationUncheckedUpdateWithoutUserInput>
   }
 
   export type StartupUncheckedUpdateOneWithoutUserNestedInput = {
@@ -8615,18 +8485,26 @@ export namespace Prisma {
     update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutUserInput, InvestorUpdateWithoutUserInput>, InvestorUncheckedUpdateWithoutUserInput>
   }
 
-  export type VerificationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput> | VerificationCreateWithoutUserInput[] | VerificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutUserInput | VerificationCreateOrConnectWithoutUserInput[]
-    upsert?: VerificationUpsertWithWhereUniqueWithoutUserInput | VerificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: VerificationCreateManyUserInputEnvelope
-    set?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    disconnect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    delete?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    update?: VerificationUpdateWithWhereUniqueWithoutUserInput | VerificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: VerificationUpdateManyWithWhereWithoutUserInput | VerificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
+  export type UserCreateNestedOneWithoutVerificationInput = {
+    create?: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerificationInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type UserUpdateOneRequiredWithoutVerificationNestedInput = {
+    create?: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVerificationInput
+    upsert?: UserUpsertWithoutVerificationInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVerificationInput, UserUpdateWithoutVerificationInput>, UserUncheckedUpdateWithoutVerificationInput>
   }
 
   export type UserCreateNestedOneWithoutStartupInput = {
@@ -8647,10 +8525,6 @@ export namespace Prisma {
     connectOrCreate?: MatchCreateOrConnectWithoutStartupInput | MatchCreateOrConnectWithoutStartupInput[]
     createMany?: MatchCreateManyStartupInputEnvelope
     connect?: MatchWhereUniqueInput | MatchWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -8714,25 +8588,11 @@ export namespace Prisma {
     connect?: MatchWhereUniqueInput | MatchWhereUniqueInput[]
   }
 
-  export type VerificationCreateNestedManyWithoutInvestorInput = {
-    create?: XOR<VerificationCreateWithoutInvestorInput, VerificationUncheckedCreateWithoutInvestorInput> | VerificationCreateWithoutInvestorInput[] | VerificationUncheckedCreateWithoutInvestorInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutInvestorInput | VerificationCreateOrConnectWithoutInvestorInput[]
-    createMany?: VerificationCreateManyInvestorInputEnvelope
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-  }
-
   export type MatchUncheckedCreateNestedManyWithoutInvestorInput = {
     create?: XOR<MatchCreateWithoutInvestorInput, MatchUncheckedCreateWithoutInvestorInput> | MatchCreateWithoutInvestorInput[] | MatchUncheckedCreateWithoutInvestorInput[]
     connectOrCreate?: MatchCreateOrConnectWithoutInvestorInput | MatchCreateOrConnectWithoutInvestorInput[]
     createMany?: MatchCreateManyInvestorInputEnvelope
     connect?: MatchWhereUniqueInput | MatchWhereUniqueInput[]
-  }
-
-  export type VerificationUncheckedCreateNestedManyWithoutInvestorInput = {
-    create?: XOR<VerificationCreateWithoutInvestorInput, VerificationUncheckedCreateWithoutInvestorInput> | VerificationCreateWithoutInvestorInput[] | VerificationUncheckedCreateWithoutInvestorInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutInvestorInput | VerificationCreateOrConnectWithoutInvestorInput[]
-    createMany?: VerificationCreateManyInvestorInputEnvelope
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
   }
 
   export type InvestorUpdatefocusAreasInput = {
@@ -8762,20 +8622,6 @@ export namespace Prisma {
     deleteMany?: MatchScalarWhereInput | MatchScalarWhereInput[]
   }
 
-  export type VerificationUpdateManyWithoutInvestorNestedInput = {
-    create?: XOR<VerificationCreateWithoutInvestorInput, VerificationUncheckedCreateWithoutInvestorInput> | VerificationCreateWithoutInvestorInput[] | VerificationUncheckedCreateWithoutInvestorInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutInvestorInput | VerificationCreateOrConnectWithoutInvestorInput[]
-    upsert?: VerificationUpsertWithWhereUniqueWithoutInvestorInput | VerificationUpsertWithWhereUniqueWithoutInvestorInput[]
-    createMany?: VerificationCreateManyInvestorInputEnvelope
-    set?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    disconnect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    delete?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    update?: VerificationUpdateWithWhereUniqueWithoutInvestorInput | VerificationUpdateWithWhereUniqueWithoutInvestorInput[]
-    updateMany?: VerificationUpdateManyWithWhereWithoutInvestorInput | VerificationUpdateManyWithWhereWithoutInvestorInput[]
-    deleteMany?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
-  }
-
   export type MatchUncheckedUpdateManyWithoutInvestorNestedInput = {
     create?: XOR<MatchCreateWithoutInvestorInput, MatchUncheckedCreateWithoutInvestorInput> | MatchCreateWithoutInvestorInput[] | MatchUncheckedCreateWithoutInvestorInput[]
     connectOrCreate?: MatchCreateOrConnectWithoutInvestorInput | MatchCreateOrConnectWithoutInvestorInput[]
@@ -8788,20 +8634,6 @@ export namespace Prisma {
     update?: MatchUpdateWithWhereUniqueWithoutInvestorInput | MatchUpdateWithWhereUniqueWithoutInvestorInput[]
     updateMany?: MatchUpdateManyWithWhereWithoutInvestorInput | MatchUpdateManyWithWhereWithoutInvestorInput[]
     deleteMany?: MatchScalarWhereInput | MatchScalarWhereInput[]
-  }
-
-  export type VerificationUncheckedUpdateManyWithoutInvestorNestedInput = {
-    create?: XOR<VerificationCreateWithoutInvestorInput, VerificationUncheckedCreateWithoutInvestorInput> | VerificationCreateWithoutInvestorInput[] | VerificationUncheckedCreateWithoutInvestorInput[]
-    connectOrCreate?: VerificationCreateOrConnectWithoutInvestorInput | VerificationCreateOrConnectWithoutInvestorInput[]
-    upsert?: VerificationUpsertWithWhereUniqueWithoutInvestorInput | VerificationUpsertWithWhereUniqueWithoutInvestorInput[]
-    createMany?: VerificationCreateManyInvestorInputEnvelope
-    set?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    disconnect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    delete?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    connect?: VerificationWhereUniqueInput | VerificationWhereUniqueInput[]
-    update?: VerificationUpdateWithWhereUniqueWithoutInvestorInput | VerificationUpdateWithWhereUniqueWithoutInvestorInput[]
-    updateMany?: VerificationUpdateManyWithWhereWithoutInvestorInput | VerificationUpdateManyWithWhereWithoutInvestorInput[]
-    deleteMany?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
   }
 
   export type StartupCreateNestedOneWithoutMatchInput = {
@@ -8832,53 +8664,6 @@ export namespace Prisma {
     update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutMatchInput, InvestorUpdateWithoutMatchInput>, InvestorUncheckedUpdateWithoutMatchInput>
   }
 
-  export type VerificationCreatedocumentsInput = {
-    set: string[]
-  }
-
-  export type UserCreateNestedOneWithoutVerificationInput = {
-    create?: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVerificationInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type InvestorCreateNestedOneWithoutVerificationInput = {
-    create?: XOR<InvestorCreateWithoutVerificationInput, InvestorUncheckedCreateWithoutVerificationInput>
-    connectOrCreate?: InvestorCreateOrConnectWithoutVerificationInput
-    connect?: InvestorWhereUniqueInput
-  }
-
-  export type VerificationUpdatedocumentsInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type EnumStatusFieldUpdateOperationsInput = {
-    set?: $Enums.Status
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type UserUpdateOneRequiredWithoutVerificationNestedInput = {
-    create?: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVerificationInput
-    upsert?: UserUpsertWithoutVerificationInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVerificationInput, UserUpdateWithoutVerificationInput>, UserUncheckedUpdateWithoutVerificationInput>
-  }
-
-  export type InvestorUpdateOneWithoutVerificationNestedInput = {
-    create?: XOR<InvestorCreateWithoutVerificationInput, InvestorUncheckedCreateWithoutVerificationInput>
-    connectOrCreate?: InvestorCreateOrConnectWithoutVerificationInput
-    upsert?: InvestorUpsertWithoutVerificationInput
-    disconnect?: InvestorWhereInput | boolean
-    delete?: InvestorWhereInput | boolean
-    connect?: InvestorWhereUniqueInput
-    update?: XOR<XOR<InvestorUpdateToOneWithWhereWithoutVerificationInput, InvestorUpdateWithoutVerificationInput>, InvestorUncheckedUpdateWithoutVerificationInput>
-  }
-
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8891,11 +8676,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedEnumUserRoleFilter<$PrismaModel = never> = {
@@ -8944,14 +8724,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedEnumUserRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.UserRole | EnumUserRoleFieldRefInput<$PrismaModel>
     in?: $Enums.UserRole[] | ListEnumUserRoleFieldRefInput<$PrismaModel>
@@ -8990,15 +8762,38 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9029,6 +8824,31 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -9045,46 +8865,27 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedEnumStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  export type VerificationCreateWithoutUserInput = {
+    id?: string
+    documents: JsonNullValueInput | InputJsonValue
+    status?: string
+    notes?: string | null
+    submittedAt?: Date | string
+    reviewedAt?: Date | string | null
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type VerificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    documents: JsonNullValueInput | InputJsonValue
+    status?: string
+    notes?: string | null
+    submittedAt?: Date | string
+    reviewedAt?: Date | string | null
   }
 
-  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumStatusFilter<$PrismaModel>
-    _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  export type VerificationCreateOrConnectWithoutUserInput = {
+    where: VerificationWhereUniqueInput
+    create: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
   }
 
   export type StartupCreateWithoutUserInput = {
@@ -9127,7 +8928,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Match?: MatchCreateNestedManyWithoutInvestorInput
-    Verification?: VerificationCreateNestedManyWithoutInvestorInput
   }
 
   export type InvestorUncheckedCreateWithoutUserInput = {
@@ -9139,7 +8939,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Match?: MatchUncheckedCreateNestedManyWithoutInvestorInput
-    Verification?: VerificationUncheckedCreateNestedManyWithoutInvestorInput
   }
 
   export type InvestorCreateOrConnectWithoutUserInput = {
@@ -9147,34 +8946,33 @@ export namespace Prisma {
     create: XOR<InvestorCreateWithoutUserInput, InvestorUncheckedCreateWithoutUserInput>
   }
 
-  export type VerificationCreateWithoutUserInput = {
-    id?: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    Investor?: InvestorCreateNestedOneWithoutVerificationInput
-  }
-
-  export type VerificationUncheckedCreateWithoutUserInput = {
-    id?: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    investorId?: string | null
-  }
-
-  export type VerificationCreateOrConnectWithoutUserInput = {
-    where: VerificationWhereUniqueInput
+  export type VerificationUpsertWithoutUserInput = {
+    update: XOR<VerificationUpdateWithoutUserInput, VerificationUncheckedUpdateWithoutUserInput>
     create: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
+    where?: VerificationWhereInput
   }
 
-  export type VerificationCreateManyUserInputEnvelope = {
-    data: VerificationCreateManyUserInput | VerificationCreateManyUserInput[]
-    skipDuplicates?: boolean
+  export type VerificationUpdateToOneWithWhereWithoutUserInput = {
+    where?: VerificationWhereInput
+    data: XOR<VerificationUpdateWithoutUserInput, VerificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type VerificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documents?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documents?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StartupUpsertWithoutUserInput = {
@@ -9234,7 +9032,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Match?: MatchUpdateManyWithoutInvestorNestedInput
-    Verification?: VerificationUpdateManyWithoutInvestorNestedInput
   }
 
   export type InvestorUncheckedUpdateWithoutUserInput = {
@@ -9246,61 +9043,94 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Match?: MatchUncheckedUpdateManyWithoutInvestorNestedInput
-    Verification?: VerificationUncheckedUpdateManyWithoutInvestorNestedInput
   }
 
-  export type VerificationUpsertWithWhereUniqueWithoutUserInput = {
-    where: VerificationWhereUniqueInput
-    update: XOR<VerificationUpdateWithoutUserInput, VerificationUncheckedUpdateWithoutUserInput>
-    create: XOR<VerificationCreateWithoutUserInput, VerificationUncheckedCreateWithoutUserInput>
+  export type UserCreateWithoutVerificationInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
+    createdAt?: Date | string
+    startup?: StartupCreateNestedOneWithoutUserInput
+    investor?: InvestorCreateNestedOneWithoutUserInput
   }
 
-  export type VerificationUpdateWithWhereUniqueWithoutUserInput = {
-    where: VerificationWhereUniqueInput
-    data: XOR<VerificationUpdateWithoutUserInput, VerificationUncheckedUpdateWithoutUserInput>
+  export type UserUncheckedCreateWithoutVerificationInput = {
+    id?: string
+    name: string
+    email: string
+    role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
+    createdAt?: Date | string
+    startup?: StartupUncheckedCreateNestedOneWithoutUserInput
+    investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
   }
 
-  export type VerificationUpdateManyWithWhereWithoutUserInput = {
-    where: VerificationScalarWhereInput
-    data: XOR<VerificationUpdateManyMutationInput, VerificationUncheckedUpdateManyWithoutUserInput>
+  export type UserCreateOrConnectWithoutVerificationInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
   }
 
-  export type VerificationScalarWhereInput = {
-    AND?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
-    OR?: VerificationScalarWhereInput[]
-    NOT?: VerificationScalarWhereInput | VerificationScalarWhereInput[]
-    id?: StringFilter<"Verification"> | string
-    userId?: StringFilter<"Verification"> | string
-    documents?: StringNullableListFilter<"Verification">
-    status?: EnumStatusFilter<"Verification"> | $Enums.Status
-    submittedAt?: DateTimeFilter<"Verification"> | Date | string
-    reviewedAt?: DateTimeNullableFilter<"Verification"> | Date | string | null
-    adminNotes?: StringNullableFilter<"Verification"> | string | null
-    investorId?: StringNullableFilter<"Verification"> | string | null
+  export type UserUpsertWithoutVerificationInput = {
+    update: XOR<UserUpdateWithoutVerificationInput, UserUncheckedUpdateWithoutVerificationInput>
+    create: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVerificationInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVerificationInput, UserUncheckedUpdateWithoutVerificationInput>
+  }
+
+  export type UserUpdateWithoutVerificationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startup?: StartupUpdateOneWithoutUserNestedInput
+    investor?: InvestorUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVerificationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
+    investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutStartupInput = {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
+    verification?: VerificationCreateNestedOneWithoutUserInput
     investor?: InvestorCreateNestedOneWithoutUserInput
-    Verification?: VerificationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutStartupInput = {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
+    verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
     investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
-    Verification?: VerificationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutStartupInput = {
@@ -9351,24 +9181,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUpdateOneWithoutUserNestedInput
     investor?: InvestorUpdateOneWithoutUserNestedInput
-    Verification?: VerificationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutStartupInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
     investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
-    Verification?: VerificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MatchUpsertWithWhereUniqueWithoutStartupInput = {
@@ -9404,24 +9234,24 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
+    verification?: VerificationCreateNestedOneWithoutUserInput
     startup?: StartupCreateNestedOneWithoutUserInput
-    Verification?: VerificationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutInvestorInput = {
     id?: string
     name: string
     email: string
-    emailVerified?: boolean
     role?: $Enums.UserRole
+    verificationStatus?: string
+    password: string
     createdAt?: Date | string
-    updatedAt?: Date | string
+    verification?: VerificationUncheckedCreateNestedOneWithoutUserInput
     startup?: StartupUncheckedCreateNestedOneWithoutUserInput
-    Verification?: VerificationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutInvestorInput = {
@@ -9457,36 +9287,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type VerificationCreateWithoutInvestorInput = {
-    id?: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    user: UserCreateNestedOneWithoutVerificationInput
-  }
-
-  export type VerificationUncheckedCreateWithoutInvestorInput = {
-    id?: string
-    userId: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-  }
-
-  export type VerificationCreateOrConnectWithoutInvestorInput = {
-    where: VerificationWhereUniqueInput
-    create: XOR<VerificationCreateWithoutInvestorInput, VerificationUncheckedCreateWithoutInvestorInput>
-  }
-
-  export type VerificationCreateManyInvestorInputEnvelope = {
-    data: VerificationCreateManyInvestorInput | VerificationCreateManyInvestorInput[]
-    skipDuplicates?: boolean
-  }
-
   export type UserUpsertWithoutInvestorInput = {
     update: XOR<UserUpdateWithoutInvestorInput, UserUncheckedUpdateWithoutInvestorInput>
     create: XOR<UserCreateWithoutInvestorInput, UserUncheckedCreateWithoutInvestorInput>
@@ -9502,24 +9302,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUpdateOneWithoutUserNestedInput
     startup?: StartupUpdateOneWithoutUserNestedInput
-    Verification?: VerificationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutInvestorInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    verificationStatus?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    verification?: VerificationUncheckedUpdateOneWithoutUserNestedInput
     startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
-    Verification?: VerificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MatchUpsertWithWhereUniqueWithoutInvestorInput = {
@@ -9536,22 +9336,6 @@ export namespace Prisma {
   export type MatchUpdateManyWithWhereWithoutInvestorInput = {
     where: MatchScalarWhereInput
     data: XOR<MatchUpdateManyMutationInput, MatchUncheckedUpdateManyWithoutInvestorInput>
-  }
-
-  export type VerificationUpsertWithWhereUniqueWithoutInvestorInput = {
-    where: VerificationWhereUniqueInput
-    update: XOR<VerificationUpdateWithoutInvestorInput, VerificationUncheckedUpdateWithoutInvestorInput>
-    create: XOR<VerificationCreateWithoutInvestorInput, VerificationUncheckedCreateWithoutInvestorInput>
-  }
-
-  export type VerificationUpdateWithWhereUniqueWithoutInvestorInput = {
-    where: VerificationWhereUniqueInput
-    data: XOR<VerificationUpdateWithoutInvestorInput, VerificationUncheckedUpdateWithoutInvestorInput>
-  }
-
-  export type VerificationUpdateManyWithWhereWithoutInvestorInput = {
-    where: VerificationScalarWhereInput
-    data: XOR<VerificationUpdateManyMutationInput, VerificationUncheckedUpdateManyWithoutInvestorInput>
   }
 
   export type StartupCreateWithoutMatchInput = {
@@ -9594,7 +9378,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInvestorInput
-    Verification?: VerificationCreateNestedManyWithoutInvestorInput
   }
 
   export type InvestorUncheckedCreateWithoutMatchInput = {
@@ -9606,7 +9389,6 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    Verification?: VerificationUncheckedCreateNestedManyWithoutInvestorInput
   }
 
   export type InvestorCreateOrConnectWithoutMatchInput = {
@@ -9671,7 +9453,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInvestorNestedInput
-    Verification?: VerificationUpdateManyWithoutInvestorNestedInput
   }
 
   export type InvestorUncheckedUpdateWithoutMatchInput = {
@@ -9683,175 +9464,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Verification?: VerificationUncheckedUpdateManyWithoutInvestorNestedInput
-  }
-
-  export type UserCreateWithoutVerificationInput = {
-    id?: string
-    name: string
-    email: string
-    emailVerified?: boolean
-    role?: $Enums.UserRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    startup?: StartupCreateNestedOneWithoutUserInput
-    investor?: InvestorCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutVerificationInput = {
-    id?: string
-    name: string
-    email: string
-    emailVerified?: boolean
-    role?: $Enums.UserRole
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    startup?: StartupUncheckedCreateNestedOneWithoutUserInput
-    investor?: InvestorUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutVerificationInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
-  }
-
-  export type InvestorCreateWithoutVerificationInput = {
-    id?: string
-    name: string
-    bio: string
-    focusAreas?: InvestorCreatefocusAreasInput | string[]
-    investmentRange: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutInvestorInput
-    Match?: MatchCreateNestedManyWithoutInvestorInput
-  }
-
-  export type InvestorUncheckedCreateWithoutVerificationInput = {
-    id?: string
-    name: string
-    bio: string
-    focusAreas?: InvestorCreatefocusAreasInput | string[]
-    investmentRange: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Match?: MatchUncheckedCreateNestedManyWithoutInvestorInput
-  }
-
-  export type InvestorCreateOrConnectWithoutVerificationInput = {
-    where: InvestorWhereUniqueInput
-    create: XOR<InvestorCreateWithoutVerificationInput, InvestorUncheckedCreateWithoutVerificationInput>
-  }
-
-  export type UserUpsertWithoutVerificationInput = {
-    update: XOR<UserUpdateWithoutVerificationInput, UserUncheckedUpdateWithoutVerificationInput>
-    create: XOR<UserCreateWithoutVerificationInput, UserUncheckedCreateWithoutVerificationInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutVerificationInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutVerificationInput, UserUncheckedUpdateWithoutVerificationInput>
-  }
-
-  export type UserUpdateWithoutVerificationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    startup?: StartupUpdateOneWithoutUserNestedInput
-    investor?: InvestorUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutVerificationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    startup?: StartupUncheckedUpdateOneWithoutUserNestedInput
-    investor?: InvestorUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type InvestorUpsertWithoutVerificationInput = {
-    update: XOR<InvestorUpdateWithoutVerificationInput, InvestorUncheckedUpdateWithoutVerificationInput>
-    create: XOR<InvestorCreateWithoutVerificationInput, InvestorUncheckedCreateWithoutVerificationInput>
-    where?: InvestorWhereInput
-  }
-
-  export type InvestorUpdateToOneWithWhereWithoutVerificationInput = {
-    where?: InvestorWhereInput
-    data: XOR<InvestorUpdateWithoutVerificationInput, InvestorUncheckedUpdateWithoutVerificationInput>
-  }
-
-  export type InvestorUpdateWithoutVerificationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
-    focusAreas?: InvestorUpdatefocusAreasInput | string[]
-    investmentRange?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutInvestorNestedInput
-    Match?: MatchUpdateManyWithoutInvestorNestedInput
-  }
-
-  export type InvestorUncheckedUpdateWithoutVerificationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    bio?: StringFieldUpdateOperationsInput | string
-    focusAreas?: InvestorUpdatefocusAreasInput | string[]
-    investmentRange?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Match?: MatchUncheckedUpdateManyWithoutInvestorNestedInput
-  }
-
-  export type VerificationCreateManyUserInput = {
-    id?: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-    investorId?: string | null
-  }
-
-  export type VerificationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    Investor?: InvestorUpdateOneWithoutVerificationNestedInput
-  }
-
-  export type VerificationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    investorId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type VerificationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    investorId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MatchCreateManyStartupInput = {
@@ -9899,16 +9511,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type VerificationCreateManyInvestorInput = {
-    id?: string
-    userId: string
-    documents?: VerificationCreatedocumentsInput | string[]
-    status?: $Enums.Status
-    submittedAt?: Date | string
-    reviewedAt?: Date | string | null
-    adminNotes?: string | null
-  }
-
   export type MatchUpdateWithoutInvestorInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -9934,36 +9536,6 @@ export namespace Prisma {
     matchScore?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VerificationUpdateWithoutInvestorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutVerificationNestedInput
-  }
-
-  export type VerificationUncheckedUpdateWithoutInvestorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type VerificationUncheckedUpdateManyWithoutInvestorInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    documents?: VerificationUpdatedocumentsInput | string[]
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

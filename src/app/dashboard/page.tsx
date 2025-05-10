@@ -1,4 +1,4 @@
-import { getCurrentUser } from "@/lib/supabase/auth";
+import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import FounderDashboard from "./founder-dashboard";
 import InvestorDashboard from "./investor-dashboard";

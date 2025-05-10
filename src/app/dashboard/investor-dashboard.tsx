@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import VerificationForm from "@/components/VerificationForm";
 
 export default function InvestorDashboard() {
   const { data: session } = useSession();
@@ -56,6 +57,15 @@ export default function InvestorDashboard() {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (session?.user?.verificationStatus !== "APPROVED") {
+    return (
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">Investor Dashboard</h1>
+        <VerificationForm userId={session?.user._id as string} />
       </div>
     );
   }

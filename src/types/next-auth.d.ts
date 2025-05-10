@@ -7,11 +7,13 @@ declare module "next-auth" {
     user: {
       _id?: String;
       role?: String;
+      verificationStatus?: String;
     } & DefaultSession["user"];
   }
   interface User {
     _id?: String;
     role?: String;
+    verificationStatus?: String;
   }
 }
 
@@ -19,5 +21,6 @@ declare module "next-auth/jwt" {
   interface JWT {
     _id?: String;
     role?: String;
+    verificationStatus?: String;
   }
 }

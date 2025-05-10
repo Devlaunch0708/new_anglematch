@@ -18,8 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { signIn } from "next-auth/react";
-import { signUpWithEmail } from "@/lib/supabase/auth";
-import { supabase } from "../../lib/supabase/client";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -35,38 +33,28 @@ export default function SignupPage() {
     },
   });
 
-  const onSubmit = async (formdata: {
+  const onSubmit = async (data: {
     name: string;
     email: string;
     password: string;
     role: "FOUNDER" | "INVESTOR";
   }) => {
     try {
-      const { data, error: authError } = await supabase.auth.signUp({
-        email: formdata.email,
-        password: formdata.password,
-        options: {
-          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/confirm`,
-          data: {
-            name: formdata.name,
-            role: formdata.role,
-            email_confirm: false,
-          },
+      const user = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(data),
       });
-      if (data.user) {
-        await fetch("/api/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formdata),
-        });
-      }
 
-      if (authError) {
-        setError(authError.message);
-        return;
+      if (user) {
+        await signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+        router.push("/dashboard");
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Signup failed");
