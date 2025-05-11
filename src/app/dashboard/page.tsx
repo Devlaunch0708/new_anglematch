@@ -11,6 +11,16 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
+  // // REMOVE IN PRODUCTION - Dummy user for testing DUMMY
+  // const dummyUser = {
+  //   id: "1",
+  //   name: "Test User",
+  //   email: "test@example.com",
+  //   role: "INVESTOR",
+  //   // role: "FOUNDER",
+  // };
+  // // Comment out the real user and use dummy for testing
+  // // const user = dummyUser;
   return (
     <div className="min-h-screen">
       {user.role === "ADMIN" ? (

@@ -65,25 +65,49 @@ export default function FounderDashboard() {
 
   if (session?.user?.verificationStatus !== "APPROVED") {
     return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Founder Dashboard</h1>
-        <VerificationForm userId={session?.user._id as string} />
+      <div className="container mx-auto p-8 max-w-3xl">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+            <h1 className="text-3xl font-bold text-white">
+              Founder Verification
+            </h1>
+            <p className="text-blue-100 mt-2">
+              Please complete your verification to access all features
+            </p>
+          </div>
+          <div className="p-6"></div>
+          <VerificationForm userId={session?.user._id as string} />
+        </div>
       </div>
     );
   }
 
   if (session?.user?.verificationStatus === "APPROVED") {
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Founder Dashboard</h1>
-      <PitchForm userId={session?.user?._id as string} />
-    </div>;
+    return (
+      <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8 ">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+              <h1 className="text-3xl font-bold text-white">
+                Complete Your Pitch
+              </h1>
+              <p className="text-blue-100 mt-2">
+                Share your startup's story with potential investors
+              </p>
+            </div>
+            <div className="p-6">
+              <PitchForm userId={session?.user?._id as string} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="min-h-screen">
       <div className="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {/* Dashboard Header */}
-
         <div>
           <div className="bg-white rounded-xl shadow-sm p-6 mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-l-4 border-blue-500">
             <div>

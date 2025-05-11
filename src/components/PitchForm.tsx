@@ -54,60 +54,105 @@ export default function PitchForm({ userId }: { userId: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <Label htmlFor="title">Pitch Title</Label>
-        <Input
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <Label htmlFor="description">Description</Label>
-        <Textarea
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <Label htmlFor="deck">Pitch Deck (PDF)</Label>
-        <Input
-          id="deck"
-          type="file"
-          accept=".pdf"
-          onChange={handleDeckChange}
-        />
-      </div>
-      <div>
-        <Label htmlFor="solutionUrl">Solution Link</Label>
-        <Input
-          id="solutionUrl"
-          type="url"
-          value={solutionUrl}
-          onChange={(e) => setSolutionUrl(e.target.value)}
-        />
-      </div>
-      <div>
-        <Label htmlFor="marketSize">Market Size</Label>
-        <Input
-          id="marketSize"
-          value={marketSize}
-          onChange={(e) => setMarketSize(e.target.value)}
-        />
-      </div>
-      <div>
-        <Label htmlFor="traction">Traction</Label>
-        <Input
-          id="traction"
-          value={traction}
-          onChange={(e) => setTraction(e.target.value)}
-        />
-      </div>
-      <Button type="submit">Save Draft</Button>
-    </form>
+    <div className="max-w-2xl mx-auto sm:p-6 bg-white rounded-lg ">
+      <h2 className="text-2xl font-bold mb-6 text-center">Create Your Pitch</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="bg-gray-50 p-4 rounded-lg space-y-4">
+          <h3 className="text-xl font-semibold mb-2">Basic Information</h3>
+          <div>
+            <Label htmlFor="title" className="text-lg font-large">
+              Pitch Title
+            </Label>
+            <Input
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="mt-1"
+              placeholder="Enter your pitch title"
+            />
+          </div>
+          <div>
+            <Label htmlFor="description" className="text-lg font-medium">
+              Description
+            </Label>
+            <Textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              className="mt-1 h-32"
+              placeholder="Describe your pitch in detail"
+            />
+          </div>
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-lg space-y-4">
+          <h3 className="text-font-semibold mb-2">Documentation</h3>
+          <div>
+            <Label htmlFor="deck" className="text-lg font-medium">
+              Pitch Deck (PDF)
+            </Label>
+            <Input
+              id="deck"
+              type="file"
+              accept=".pdf"
+              onChange={handleDeckChange}
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label htmlFor="solutionUrl" className="text-lg font-medium">
+              Solution Link
+            </Label>
+            <Input
+              id="solutionUrl"
+              type="url"
+              value={solutionUrl}
+              onChange={(e) => setSolutionUrl(e.target.value)}
+              className="mt-1"
+              placeholder="https://..."
+            />
+          </div>
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-lg space-y-4">
+          <h3 className="text-font-semibold mb-2">Market Information</h3>
+          <div>
+            <Label htmlFor="marketSize" className="text-lg font-medium">
+              Market Size
+            </Label>
+            <Input
+              id="marketSize"
+              value={marketSize}
+              onChange={(e) => setMarketSize(e.target.value)}
+              className="mt-1"
+              placeholder="Enter market size"
+            />
+          </div>
+          <div>
+            <Label htmlFor="traction" className="text-lg font-medium">
+              Traction
+            </Label>
+            <Input
+              id="traction"
+              value={traction}
+              onChange={(e) => setTraction(e.target.value)}
+              className="mt-1"
+              placeholder="Describe your current traction"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-end pt-4">
+          <Button
+            type="submit"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+          >
+            Save Draft
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }

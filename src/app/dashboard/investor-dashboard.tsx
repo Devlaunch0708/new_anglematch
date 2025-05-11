@@ -21,9 +21,50 @@ import PitchCard from "@/components/PitchCard";
 export default function InvestorDashboard() {
   const { data: session } = useSession();
   const [investor, setInvestor] = useState<any>(null);
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState<
+    Array<{
+      id: string;
+      startup: {
+        id: string;
+        name: string;
+        industry: string;
+      };
+      matchScore: number;
+    }>
+  >([]);
   const [loading, setLoading] = useState(true);
-
+  // Dummy matches data
+  useEffect(() => {
+    setMatches([
+      {
+        id: "1",
+        startup: {
+          id: "startup1",
+          name: "EcoTech Solutions",
+          industry: "Clean Energy",
+        },
+        matchScore: 92.5,
+      },
+      {
+        id: "2",
+        startup: {
+          id: "startup2",
+          name: "HealthAI",
+          industry: "Healthcare Technology",
+        },
+        matchScore: 87.8,
+      },
+      {
+        id: "3",
+        startup: {
+          id: "startup3",
+          name: "FinServe",
+          industry: "Financial Technology",
+        },
+        matchScore: 85.2,
+      },
+    ]);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,6 +97,50 @@ export default function InvestorDashboard() {
 
   const [pitches, setPitches] = useState<any[]>([]);
 
+  // Dummy pitch data
+  // useEffect(() => {
+  //   setPitches([
+  //     {
+  //       id: "1",
+  //       title: "Eco-Friendly Smart Home Solutions",
+  //       description: "Developing IoT devices for sustainable home automation",
+  //       industry: "Green Technology",
+  //       fundingGoal: 500000,
+  //       equity: "10%",
+  //       stage: "Seed",
+  //       location: "San Francisco, CA",
+  //       teamSize: 5,
+  //       marketSize: "$50B",
+  //       traction: "1000+ beta users, $100K ARR",
+  //     },
+  //     {
+  //       id: "2",
+  //       title: "AI-Powered Healthcare Diagnostics",
+  //       description: "Machine learning platform for early disease detection",
+  //       industry: "Healthcare",
+  //       fundingGoal: 1000000,
+  //       equity: "15%",
+  //       stage: "Series A",
+  //       location: "Boston, MA",
+  //       teamSize: 12,
+  //       marketSize: "$200B",
+  //       traction: "5 hospital partnerships, 10K patient scans",
+  //     },
+  //     {
+  //       id: "3",
+  //       title: "Blockchain Supply Chain Platform",
+  //       description: "Transparent tracking system for global logistics",
+  //       industry: "Supply Chain",
+  //       fundingGoal: 750000,
+  //       equity: "12%",
+  //       stage: "Seed",
+  //       location: "Singapore",
+  //       teamSize: 8,
+  //       marketSize: "$100B",
+  //       traction: "3 enterprise clients, $250K pipeline",
+  //     },
+  //   ]);
+  // }, []);
   useEffect(() => {
     const fetchPitches = async () => {
       const data = await fetch("/api/pitches", {
@@ -101,38 +186,54 @@ export default function InvestorDashboard() {
 
   if (session?.user?.verificationStatus !== "APPROVED") {
     return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-2xl font-bold mb-4">Investor Dashboard</h1>
-        <VerificationForm userId={session?.user._id as string} />
+      <div className="container mx-auto p-8 max-w-3xl">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+            <h1 className="text-3xl font-bold text-white">
+              Investor Verification
+            </h1>
+            <p className="text-blue-100 mt-2">
+              Please complete the verification process to access the investor
+              dashboard
+            </p>
+          </div>
+          <div className="p-6">
+            <VerificationForm userId={session?.user._id as string} />
+          </div>
+        </div>
       </div>
     );
   }
   if (session?.user?.verificationStatus === "APPROVED") {
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Investor Dashboard</h1>
-      <div className="grid grid-cols-1 gap-4">
-        {pitches.map((pitch) => (
-          <PitchCard
-            key={pitch.id}
-            pitch={pitch}
-            onConnect={() => handleConnect(pitch.id)}
-          />
-        ))}
+    return (
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl sm:text-4xl font-bold text-blue-500 mb-4">
+          Investor Dashboard
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          {pitches.map((pitch) => (
+            <PitchCard
+              key={pitch.id}
+              pitch={pitch}
+              onConnect={() => handleConnect(pitch.id)}
+            />
+          ))}
+        </div>
       </div>
-    </div>;
+    );
   }
 
   return (
     <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex justify-between items-center mb-10 border-b border-gray-100 pb-6">
-          <h1 className="text-4xl font-bold text-blue-500">
+        <div className="flex justify-between items-center mb-10 border-b border-gray-100 pb-6 flex-wrap">
+          <h1 className="sm:text-4xl text-2xl font-bold text-blue-500 mr-auto">
             Investor Dashboard
           </h1>
           {!investor ? (
             <Button
               asChild
-              className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition-all"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-2 rounded-lg shadow-md transition-all  my-2"
             >
               <Link href="/create-investor">Create Investor Profile</Link>
             </Button>
@@ -140,7 +241,7 @@ export default function InvestorDashboard() {
             <Button
               asChild
               variant="outline"
-              className="border-blue-500 text-blue-500 hover:bg-blue-50 font-medium px-6 py-2 rounded-lg transition-all"
+              className="border-blue-500 text-blue-500 hover:bg-blue-50 font-medium px-6 py-2 rounded-lg transition-all  my-2"
             >
               <Link href={`/investors/${investor.id}`}>View Profile</Link>
             </Button>
@@ -148,9 +249,9 @@ export default function InvestorDashboard() {
         </div>
 
         {!investor ? (
-          <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-            <CardHeader className="bg-blue-50 border-b border-gray-200 px-6 py-5">
-              <CardTitle className="text-2xl font-semibold text-black">
+          <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden p-0">
+            <CardHeader className="bg-blue-50 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-5">
+              <CardTitle className="text-2xl font-semibold text-white">
                 Complete Your Investor Profile
               </CardTitle>
             </CardHeader>
@@ -160,19 +261,23 @@ export default function InvestorDashboard() {
               </p>
               <Button
                 asChild
-                className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-lg shadow-md transition-all"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-8 py-3 rounded-lg shadow-md transition-all m-2 "
               >
                 <Link href="/create-investor">Get Started</Link>
               </Button>
-              <Button variant="outline">Find More Startups</Button>
-              <Button variant="outline">View Analytics</Button>
+              <Button variant="outline" className="m-2">
+                Find More Startups
+              </Button>
+              <Button variant="outline" className="m-2">
+                View Analytics
+              </Button>
             </CardContent>
           </Card>
         ) : (
           <div className="grid gap-8">
-            <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-              <CardHeader className="bg-blue-50 border-b border-gray-200 px-6 py-5">
-                <CardTitle className="text-2xl font-semibold text-black">
+            <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden p-0">
+              <CardHeader className="bg-blue-500 border-b border-gray-200 px-6 py-5">
+                <CardTitle className="text-2xl font-semibold text-white">
                   Your Matches
                 </CardTitle>
               </CardHeader>
@@ -246,9 +351,9 @@ export default function InvestorDashboard() {
               </CardContent>
             </Card>
 
-            <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-              <CardHeader className="bg-blue-50 border-b border-gray-200 px-6 py-5">
-                <CardTitle className="text-2xl font-semibold text-black">
+            <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden p-0">
+              <CardHeader className="bg-blue-500 border-b border-gray-200 px-6 py-0">
+                <CardTitle className="text-2xl font-semibold text-white">
                   Recommended Startups
                 </CardTitle>
               </CardHeader>
