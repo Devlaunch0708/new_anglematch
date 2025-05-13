@@ -17,13 +17,67 @@ import {
 } from "@/components/ui/dialog";
 import VerificationForm from "@/components/VerificationForm";
 import PitchForm from "@/components/PitchForm";
+import { set } from "zod";
 
 export default function FounderDashboard() {
+  interface Match {
+    id: string;
+    investor: {
+      id: string;
+      user: {
+        name: string;
+      };
+    };
+    matchScore: number;
+  }
   const { data: session } = useSession();
   const [startup, setStartup] = useState<Startup | null>(null);
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // DUMMY: for development purposes, remove in production
+  /*
+  const dummyStartup = {
+    id: "123",
+    name: "Demo Startup",
+    description: "A demo startup for testing",
+    industry: "Technology",
+    stage: "SEED",
+    website: null,
+    fundingGoal: 1000000,
+    userId: session?.user?._id || "demo-user",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  } as Startup;
+  const dummyMatches: Match[] = [
+    // dummy
+    {
+      id: "1",
+      investor: {
+        id: "inv1",
+        user: {
+          name: "John Smith",
+        },
+      },
+      matchScore: 85.5,
+    },
+    {
+      id: "2",
+      investor: {
+        id: "inv2",
+        user: {
+          name: "Jane Doe",
+        },
+      },
+      matchScore: 92.3,
+    },
+  ];
+  // DUMMY: for development purposes, remove in production
+  useEffect(() => {
+    setStartup(dummyStartup); // dummy
+    setMatches(dummyMatches); // dummy
+  }, []);
+*/
   useEffect(() => {
     const fetchData = async () => {
       try {

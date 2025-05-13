@@ -17,54 +17,97 @@ import {
 import VerificationForm from "@/components/VerificationForm";
 import { prisma } from "@/lib/prisma";
 import PitchCard from "@/components/PitchCard";
+import { set } from "zod";
 
 export default function InvestorDashboard() {
+  interface Match {
+    id: string;
+    startup: {
+      id: string;
+      name: string;
+      industry: string;
+    };
+    matchScore: number;
+  }
   const { data: session } = useSession();
   const [investor, setInvestor] = useState<any>(null);
-  const [matches, setMatches] = useState<
-    Array<{
-      id: string;
-      startup: {
-        id: string;
-        name: string;
-        industry: string;
-      };
-      matchScore: number;
-    }>
-  >([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pitches, setPitches] = useState<any[]>([]);
   // Dummy matches data
-  useEffect(() => {
-    setMatches([
-      {
-        id: "1",
-        startup: {
-          id: "startup1",
-          name: "EcoTech Solutions",
-          industry: "Clean Energy",
-        },
-        matchScore: 92.5,
+  const dummyMatches: Match[] = [
+    {
+      id: "1",
+      startup: {
+        id: "startup1",
+        name: "EcoTech Solutions",
+        industry: "Clean Energy",
       },
-      {
-        id: "2",
-        startup: {
-          id: "startup2",
-          name: "HealthAI",
-          industry: "Healthcare Technology",
-        },
-        matchScore: 87.8,
+      matchScore: 92.5,
+    },
+    {
+      id: "2",
+      startup: {
+        id: "startup2",
+        name: "HealthAI",
+        industry: "Healthcare Technology",
       },
-      {
-        id: "3",
-        startup: {
-          id: "startup3",
-          name: "FinServe",
-          industry: "Financial Technology",
-        },
-        matchScore: 85.2,
+      matchScore: 87.8,
+    },
+    {
+      id: "3",
+      startup: {
+        id: "startup3",
+        name: "FinServe",
+        industry: "Financial Technology",
       },
-    ]);
-  }, []);
+      matchScore: 85.2,
+    },
+  ];
+
+  // Dummy pitch data
+  const dummyPitches = [
+    {
+      id: "1",
+      title: "Eco-Friendly Smart Home Solutions",
+      description: "Developing IoT devices for sustainable home automation",
+      industry: "Green Technology",
+      fundingGoal: 500000,
+      equity: "10%",
+      stage: "Seed",
+      location: "San Francisco, CA",
+      teamSize: 5,
+      marketSize: "$50B",
+      traction: "1000+ beta users, $100K ARR",
+    },
+    {
+      id: "2",
+      title: "AI-Powered Healthcare Diagnostics",
+      description: "Machine learning platform for early disease detection",
+      industry: "Healthcare",
+      fundingGoal: 1000000,
+      equity: "15%",
+      stage: "Series A",
+      location: "Boston, MA",
+      teamSize: 12,
+      marketSize: "$200B",
+      traction: "5 hospital partnerships, 10K patient scans",
+    },
+    {
+      id: "3",
+      title: "Blockchain Supply Chain Platform",
+      description: "Transparent tracking system for global logistics",
+      industry: "Supply Chain",
+      fundingGoal: 750000,
+      equity: "12%",
+      stage: "Seed",
+      location: "Singapore",
+      teamSize: 8,
+      marketSize: "$100B",
+      traction: "3 enterprise clients, $250K pipeline",
+    },
+  ];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,7 +124,8 @@ export default function InvestorDashboard() {
         const matchesRes = await fetch("/api/matches?type=investor");
         if (matchesRes.ok) {
           const matchesData = await matchesRes.json();
-          setMatches(matchesData);
+          // setMatches(matchesData);
+          setMatches(dummyMatches); // DUMMY
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -95,52 +139,6 @@ export default function InvestorDashboard() {
     }
   }, [session]);
 
-  const [pitches, setPitches] = useState<any[]>([]);
-
-  // Dummy pitch data
-  // useEffect(() => {
-  //   setPitches([
-  //     {
-  //       id: "1",
-  //       title: "Eco-Friendly Smart Home Solutions",
-  //       description: "Developing IoT devices for sustainable home automation",
-  //       industry: "Green Technology",
-  //       fundingGoal: 500000,
-  //       equity: "10%",
-  //       stage: "Seed",
-  //       location: "San Francisco, CA",
-  //       teamSize: 5,
-  //       marketSize: "$50B",
-  //       traction: "1000+ beta users, $100K ARR",
-  //     },
-  //     {
-  //       id: "2",
-  //       title: "AI-Powered Healthcare Diagnostics",
-  //       description: "Machine learning platform for early disease detection",
-  //       industry: "Healthcare",
-  //       fundingGoal: 1000000,
-  //       equity: "15%",
-  //       stage: "Series A",
-  //       location: "Boston, MA",
-  //       teamSize: 12,
-  //       marketSize: "$200B",
-  //       traction: "5 hospital partnerships, 10K patient scans",
-  //     },
-  //     {
-  //       id: "3",
-  //       title: "Blockchain Supply Chain Platform",
-  //       description: "Transparent tracking system for global logistics",
-  //       industry: "Supply Chain",
-  //       fundingGoal: 750000,
-  //       equity: "12%",
-  //       stage: "Seed",
-  //       location: "Singapore",
-  //       teamSize: 8,
-  //       marketSize: "$100B",
-  //       traction: "3 enterprise clients, $250K pipeline",
-  //     },
-  //   ]);
-  // }, []);
   useEffect(() => {
     const fetchPitches = async () => {
       const data = await fetch("/api/pitches", {
@@ -149,7 +147,8 @@ export default function InvestorDashboard() {
           "Content-Type": "application/json",
         },
       }).then((res) => res.json());
-      setPitches(data);
+      // setPitches(data);
+      setPitches(dummyPitches); // DUMMY
     };
     fetchPitches();
   }, []);
@@ -207,22 +206,6 @@ export default function InvestorDashboard() {
   if (session?.user?.verificationStatus === "APPROVED") {
     return (
       <div>
-        {" "}
-        <div className="container mx-auto p-4">
-          <h1 className="text-2xl sm:text-4xl font-bold text-blue-500 mb-4">
-            Pitches Card
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-            {pitches &&
-              pitches.map((pitch) => (
-                <PitchCard
-                  key={pitch.id}
-                  pitch={pitch}
-                  onConnect={() => handleConnect(pitch.id)}
-                />
-              ))}
-          </div>
-        </div>
         <div className="bg-white min-h-screen">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div className="flex justify-between items-center mb-10 border-b border-gray-100 pb-6 flex-wrap">
@@ -246,7 +229,51 @@ export default function InvestorDashboard() {
                 </Button>
               )}
             </div>
-
+            <div className="container mx-auto mb-8">
+              <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden p-0">
+                <CardHeader className="bg-blue-500 border-b border-gray-200 px-6 py-5">
+                  <CardTitle className="text-2xl font-semibold text-white">
+                    Pitches Card
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="px-6 py-6">
+                  {pitches.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <div className="p-4 rounded-full bg-blue-50 mb-4">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-10 w-10 text-blue-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 9v2m0 4h.01M12 6a9 9 0 100 18 9 9 0 000-18z"
+                          />
+                        </svg>
+                      </div>
+                      <p className="text-gray-600 text-lg">
+                        You don't have any pithces yet. We'll notify you when we
+                        find compatible startups.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                      {pitches.map((match: any) => (
+                        <PitchCard
+                          key={match.id}
+                          pitch={match}
+                          onConnect={() => handleConnect(match.id)}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
             {!investor ? (
               <Card className="border border-gray-200 rounded-xl shadow-sm overflow-hidden p-0">
                 <CardHeader className="bg-blue-50 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-5">
