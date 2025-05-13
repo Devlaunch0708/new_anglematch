@@ -24,11 +24,27 @@ export default function VerificationForm({ userId }: { userId: string }) {
     try {
       const uploads = await Promise.all(
         files.map(async (file) => {
-          const { data, error } = await supabase.storage
-            .from("verification-documents")
-            .upload(`${userId}/${file.name}`, file);
-          if (error) throw error;
-          return data.path;
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append(
+            "upload_preset",
+            process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!
+          );
+          formData.append("folder", `verification-documents/${userId}`);
+
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/auto/upload`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+
+          const data = await response.json();
+          if (data.error) {
+            throw new Error(`File upload failed: ${data.error.message}`);
+          }
+          return data.secure_url; // Cloudinary file URL
         })
       );
 
